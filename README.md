@@ -32,6 +32,29 @@ muted, host, waiting) in sync through the API.
 | Backend  | Python 3.11+, FastAPI, Uvicorn, Pydantic    |
 | Database | SQLite via SQLAlchemy 2.1                   |
 
+## Database schema
+
+SQLite, four tables (full definition with constraints and sample queries in `backend/schema_6.sql`):
+
+```
+users 1──N meetings 1──N meeting_participants
+              meetings 1──N meeting_attachments
+users 1──N meeting_participants (nullable: guests have no account)
+```
+
+| Table | Purpose | Key columns |
+| ----- | ------- | ----------- |
+| `users` | Accounts | `email` (unique), `display_name`, `personal_meeting_id` (unique 10 digits), `timezone` |
+| `meetings` | Instant and scheduled meetings in one table | `meeting_code` (unique 11 digits), `host_id` → users, `meeting_type`, `status` (scheduled / live / ended / cancelled), `scheduled_start_at`, `duration_minutes`, `started_at`, `ended_at`, settings (`passcode`, `waiting_room_enabled`, video defaults, ...) |
+| `meeting_participants` | One row per join, so leaving and rejoining keeps attendance history | `meeting_id` → meetings, `user_id` → users (nullable), `client_token` (one browser), `display_name`, `role` (host / participant), `status` (waiting / joined / left / removed), `is_muted`, `joined_at`, `left_at`, `last_seen_at` |
+| `meeting_attachments` | Whiteboards and docs added when scheduling | `meeting_id` → meetings, `kind`, `title` |
+
+Rules are enforced by the database itself: CHECK constraints keep each meeting's status and
+timestamps consistent (a live meeting has `started_at` and no `ended_at`, an instant meeting has no
+schedule, ...), and partial unique indexes allow at most one host in the room and one active row per
+browser in a meeting. Timestamps are stored as UTC text; foreign keys cascade when a meeting is deleted.
+The database is created and seeded with sample users and meetings on first start.
+
 ## Project structure
 
 ```
@@ -90,6 +113,25 @@ Frontend:
 | Variable                   | Default                 | Purpose                 |
 | -------------------------- | ----------------------- | ----------------------- |
 | `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8000` | URL of the backend      |
+
+## Assumptions
+
+- **Login:** the assignment assumes a logged-in default user. As a bonus, there is a simple sign-in
+  with name and email and no password; the account is remembered in the browser. Opening a meeting
+  link while signed out asks you to sign in first and then returns to the meeting.
+- **Audio and video are not streamed.** Mute, video, raise hand and the participant list are kept in
+  sync through the API (each browser checks in every 3 seconds); there is no WebRTC.
+- **Meeting chat and reactions are local:** they show on your own screen only.
+- **Passcodes:** instant meetings get a passcode for the invite, but anyone with the link or the
+  Meeting ID joins without typing it. Scheduled meetings ask for their passcode.
+- **Time limits:** scheduled meetings end when their duration is up, instant meetings after 40
+  minutes, like Zoom's free plan.
+- **Scheduled meetings** can only be joined after the host starts them; until then guests see a
+  "Waiting for the host" screen.
+- **One browser = one participant.** Each browser has its own token, so the same account can join
+  from two browsers as two participants.
+- **Personal Meeting ID:** every user has a permanent 10-digit ID; scheduled meetings can use it
+  instead of a generated 11-digit ID.
 
 ## Deployment
 
