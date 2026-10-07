@@ -4854,3 +4854,15 @@ a.recent-item:focus-visible { outline: 2px solid #0b5cff; outline-offset: 1px; }
   .zr-end-btn .zr-btn-icon > svg:first-child { width: 28px; height: 28px; }
 }
 
+/* Waiting for the host to start a scheduled meeting */
+.zr-wait-host { gap: 12px; }
+.zr-wait-host .zr-joining-spinner { width: 48px; height: 48px; border-width: 4px; margin-bottom: 8px; }
+.zr-wait-host h2 { font-size: 24px; }
+.zr-wait-host p { margin: 0; color: #d4d4d4; font-size: 15px; }
+.zr-wait-host .zr-wait-topic { color: #fff; font-size: 17px; font-weight: 600; }
+.zr-wait-host .zr-wait-note { color: #a3a8b0; font-size: 14px; }
+.zr-wait-host .zr-wait-note a { color: #4b96f1; }
+.zr-wait-host .zr-lobby-leave { margin-top: 10px; }
+@media (max-width: 640px) {
+  .zr-wait-host h2 { font-size: 20px; }
+}

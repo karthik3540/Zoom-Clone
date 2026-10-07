@@ -10,7 +10,7 @@ import ProfileMenu from "@/components/ProfileMenu";
 import ReactionsMenu, { FEEDBACK, Feedback, FeedbackIcon } from "@/components/Reactions";
 import ZoomLogo from "@/components/ZoomLogo";
 import { useRoomSession } from "@/lib/useRoomSession";
-import { requireSignIn } from "@/lib/identity";
+import { getUserId, requireSignIn } from "@/lib/identity";
 import { getActiveMeeting, setActiveMeeting, setRoomOpen, updateActiveMeeting } from "@/lib/activeMeeting";
 import {
   BackIcon, BackgroundsIcon, BellIcon, CaretUpIcon, ChatIcon, CloseIcon, DotsIcon, EmojiIcon, EndIcon,
@@ -26,6 +26,7 @@ import {
   formatMeetingCode,
   formatMeetingId,
   getMeetingDetails,
+  getPublicMeeting,
   isMeetingCode,
   removeAttachment,
   startMeeting,
@@ -117,8 +118,12 @@ export default function MeetingDetailsPage() {
     }));
   }
 
+  // The signed-in account (null until read in the browser).
+  const [userId, setUserId] = useState<string | null>(null);
+
   useEffect(() => {
     if (requireSignIn(router)) return;
+    setUserId(getUserId());
     const params = new URLSearchParams(window.location.search);
     if (params.get("live") === "1") {
       setShowLiveMeeting(true);
@@ -688,6 +693,26 @@ export default function MeetingDetailsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room.state]);
 
+  // A scheduled meeting the host has not started yet: guests see "Waiting for the host to start
+  // this meeting", and the join screen appears by itself once it starts (checked every 5 seconds).
+  const isOwner = details !== null && userId !== null && String(details.host_id) === userId;
+  const waitingForHost = showLiveMeeting && details?.status === "scheduled" && userId !== null && !isOwner
+    && (room.state === "entry" || room.state === "loading");
+  const meetingOver = showLiveMeeting && !isOwner && (details?.status === "ended" || details?.status === "cancelled")
+    && (room.state === "entry" || room.state === "loading");
+  useEffect(() => {
+    if (!waitingForHost || !details) return;
+    const code = details.meeting_code;
+    const timer = window.setInterval(async () => {
+      const meeting = await getPublicMeeting(code).catch(() => null);
+      if (meeting && meeting.status !== "scheduled") {
+        getMeetingDetails(code).then(applyDetails).catch(() => undefined);
+      }
+    }, 5000);
+    return () => window.clearInterval(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [waitingForHost, details?.meeting_code]);
+
   const entryReady = entryName.trim() !== "" && (!details?.passcode_required || entryPasscode.trim() !== "");
 
   return (
@@ -1255,7 +1280,29 @@ export default function MeetingDetailsPage() {
                   </div>
                 </div>
 
-                {room.state === "joining" || (room.state === "loading" && details !== null && !loadError) ? (
+                {waitingForHost && details ? (
+                  <div className="zr-lobby zr-wait-host" role="status">
+                    <span className="zr-joining-spinner" aria-hidden="true" />
+                    <h2>Waiting for the host to start this meeting</h2>
+                    <p className="zr-wait-topic">{details.title}</p>
+                    {details.scheduled_start_at && (
+                      <p>
+                        {formatInZone(details.scheduled_start_at, details.timezone)} ({timeZonePlace(details.timezone)})
+                      </p>
+                    )}
+                    <p className="zr-wait-note">This page moves on by itself when the host starts the meeting.</p>
+                    <p className="zr-wait-note">
+                      If you are the host, <Link href={`/signin?next=${encodeURIComponent(`/meetings/my-meeting?meeting=${details.meeting_code}`)}`}>sign in</Link> to start this meeting.
+                    </p>
+                    <button type="button" className="zr-lobby-leave" onClick={() => router.push("/")}>Leave</button>
+                  </div>
+                ) : meetingOver ? (
+                  <div className="zr-lobby" role="status">
+                    <h2>This meeting has ended</h2>
+                    <p>{meetingData.topic}</p>
+                    <button type="button" className="zr-lobby-leave" onClick={() => router.push("/")}>OK</button>
+                  </div>
+                ) : room.state === "joining" || (room.state === "loading" && details !== null && !loadError) ? (
                   <JoiningMeeting />
                 ) : (room.state === "entry" || room.state === "waiting" || room.state === "removed"
                   || room.state === "ended") ? (
