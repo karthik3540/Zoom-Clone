@@ -10,6 +10,7 @@ import ProfileMenu from "@/components/ProfileMenu";
 import ReactionsMenu, { FEEDBACK, Feedback, FeedbackIcon } from "@/components/Reactions";
 import ZoomLogo from "@/components/ZoomLogo";
 import { useRoomSession } from "@/lib/useRoomSession";
+import { DEMO_MESSAGE } from "@/lib/demoNotice";
 import { getUserId, requireSignIn, signOut } from "@/lib/identity";
 import { getActiveMeeting, setActiveMeeting, setRoomOpen, updateActiveMeeting } from "@/lib/activeMeeting";
 import {
@@ -82,20 +83,8 @@ export default function MeetingDetailsPage() {
   const [errorToast, setErrorToast] = useState<string | null>(null);
 
   // Meeting state (allows live editing)
-  const [meetingData, setMeetingData] = useState({
-    topic: "My Meeting",
-    date: "2026-10-06",
-    startTime: "11:30 PM",
-    endTime: "12:10 AM",
-    timeDisplay: "Wednesday October 7, 12:30 - 1:10 AM",
-    timeZoneDisplay: "Oct 6, 2026 11:30 PM India",
-    meetingId: "894 8320 6098",
-    passcode: "829415",
-    inviteLink: "https://us05web.zoom.us/j/89483206098?pwd=xxxx",
-    hostVideo: false,
-    participantVideo: false,
-    allowTranscribe: true,
-  });
+  // Filled in from the backend (getMeetingDetails); empty until then, never sample data.
+  const [meetingData, setMeetingData] = useState({ topic: "", meetingId: "", passcode: "", inviteLink: "" });
 
   // Modals state
   const [showCopyModal, setShowCopyModal] = useState(false);
@@ -115,8 +104,6 @@ export default function MeetingDetailsPage() {
       meetingId: formatMeetingId(meeting.public_meeting_id),
       passcode: meeting.passcode ?? "",
       inviteLink: meeting.invite_url,
-      hostVideo: meeting.host_video_enabled,
-      participantVideo: meeting.participant_video_enabled,
     }));
   }
 
@@ -1108,7 +1095,7 @@ export default function MeetingDetailsPage() {
                 <button
                   type="button"
                   className="btn-outline-action btn-save-template"
-                  onClick={() => showToast("Saving as a template isn't available yet.")}
+                  onClick={() => showToast(DEMO_MESSAGE)}
                 >
                   Save as Template
                 </button>
@@ -1326,21 +1313,21 @@ export default function MeetingDetailsPage() {
                 <button
                   type="button"
                   className="zw-pill-btn zw-pill-admin"
-                  onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                  onClick={() => showRoomNotice(DEMO_MESSAGE)}
                 >
                   Admin Center
                 </button>
                 <button
                   type="button"
                   className="zw-pill-btn zw-pill-download"
-                  onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                  onClick={() => showRoomNotice(DEMO_MESSAGE)}
                 >
                   Download
                 </button>
                 <button
                   type="button"
                   className="zw-pill-btn zw-pill-upgrade"
-                  onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                  onClick={() => showRoomNotice(DEMO_MESSAGE)}
                 >
                   Upgrade
                 </button>
@@ -1348,7 +1335,7 @@ export default function MeetingDetailsPage() {
                   type="button"
                   className="zw-icon-btn zw-bell-btn"
                   aria-label="Notifications"
-                  onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                  onClick={() => showRoomNotice(DEMO_MESSAGE)}
                 >
                   <BellIcon size={20} />
                 </button>
@@ -1386,7 +1373,7 @@ export default function MeetingDetailsPage() {
                       <button
                         type="button"
                         className="zw-pd-status-row"
-                        onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                        onClick={() => showRoomNotice(DEMO_MESSAGE)}
                       >
                         <span className="zw-pd-cam-icon">
                           <svg width="15" height="12" viewBox="0 0 16 12" fill="#f26522">
@@ -1404,7 +1391,7 @@ export default function MeetingDetailsPage() {
                         <button
                           type="button"
                           className="zw-pd-menu-item"
-                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                          onClick={() => showRoomNotice(DEMO_MESSAGE)}
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -1415,7 +1402,7 @@ export default function MeetingDetailsPage() {
                         <button
                           type="button"
                           className="zw-pd-menu-item"
-                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                          onClick={() => showRoomNotice(DEMO_MESSAGE)}
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                             <circle cx="12" cy="12" r="3" />
@@ -1426,7 +1413,7 @@ export default function MeetingDetailsPage() {
                         <button
                           type="button"
                           className="zw-pd-menu-item"
-                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                          onClick={() => showRoomNotice(DEMO_MESSAGE)}
                         >
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                             <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -1437,7 +1424,7 @@ export default function MeetingDetailsPage() {
                         <button
                           type="button"
                           className="zw-pd-menu-item zw-pd-menu-item-between"
-                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                          onClick={() => showRoomNotice(DEMO_MESSAGE)}
                         >
                           <div className="zw-pd-item-left">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -1455,7 +1442,7 @@ export default function MeetingDetailsPage() {
                       <button
                         type="button"
                         className="zw-pd-plain-item"
-                        onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                        onClick={() => showRoomNotice(DEMO_MESSAGE)}
                       >
                         Add account
                       </button>
@@ -1476,7 +1463,7 @@ export default function MeetingDetailsPage() {
                         <button
                           type="button"
                           className="zw-pd-promo-btn"
-                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                          onClick={() => showRoomNotice(DEMO_MESSAGE)}
                         >
                           Upgrade now
                         </button>
@@ -1485,7 +1472,7 @@ export default function MeetingDetailsPage() {
                       <button
                         type="button"
                         className="zw-pd-download-link"
-                        onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                        onClick={() => showRoomNotice(DEMO_MESSAGE)}
                       >
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -1823,7 +1810,7 @@ export default function MeetingDetailsPage() {
                             <button
                               type="button"
                               className="zj-ctrl zj-backgrounds"
-                              onClick={() => showRoomNotice("Backgrounds aren't available yet.")}
+                              onClick={() => showRoomNotice(DEMO_MESSAGE)}
                             >
                               <BackgroundsIcon size={22} />
                               <span>Backgrounds</span>
@@ -2033,7 +2020,7 @@ export default function MeetingDetailsPage() {
                         <button
                           type="button"
                           className="zr-btn zr-share"
-                          onClick={() => showRoomNotice("Screen sharing isn't available yet.")}
+                          onClick={() => showRoomNotice(DEMO_MESSAGE)}
                         >
                           <span className="zr-btn-icon"><span className="zr-share-icon"><ShareArrowIcon /></span><CaretUpIcon className="zr-btn-caret" /></span>
                           <span className="zr-btn-label">Share</span>
@@ -2041,7 +2028,7 @@ export default function MeetingDetailsPage() {
                         <button
                           type="button"
                           className="zr-btn zr-optional"
-                          onClick={() => showRoomNotice("Host tools aren't available yet.")}
+                          onClick={() => showRoomNotice(DEMO_MESSAGE)}
                         >
                           <span className="zr-btn-icon"><HostToolsIcon /></span>
                           <span className="zr-btn-label">Host tools</span>
@@ -2049,7 +2036,7 @@ export default function MeetingDetailsPage() {
                         <button
                           type="button"
                           className="zr-btn"
-                          onClick={() => showRoomNotice("More options aren't available yet.")}
+                          onClick={() => showRoomNotice(DEMO_MESSAGE)}
                         >
                           <span className="zr-btn-icon"><MoreIcon /></span>
                           <span className="zr-btn-label">More</span>
@@ -2080,7 +2067,7 @@ export default function MeetingDetailsPage() {
                           <button
                             type="button"
                             aria-label="Pop out chat"
-                            onClick={() => showRoomNotice("Pop-out chat isn't available yet.")}
+                            onClick={() => showRoomNotice(DEMO_MESSAGE)}
                           >
                             <PopOutIcon size={22} />
                           </button>
@@ -2136,16 +2123,16 @@ export default function MeetingDetailsPage() {
                           maxLength={1000}
                         />
                         <div className="zc-tools">
-                          <button type="button" aria-label="Format" onClick={() => showRoomNotice("Formatting isn't available yet.")}>
+                          <button type="button" aria-label="Format" onClick={() => showRoomNotice(DEMO_MESSAGE)}>
                             <FormatIcon size={20} />
                           </button>
-                          <button type="button" aria-label="File" onClick={() => showRoomNotice("Sending files isn't available yet.")}>
+                          <button type="button" aria-label="File" onClick={() => showRoomNotice(DEMO_MESSAGE)}>
                             <FileIcon size={20} />
                           </button>
                           <button type="button" aria-label="Emoji" onClick={() => setChatInput((text) => text + "🙂")}>
                             <EmojiIcon size={20} />
                           </button>
-                          <button type="button" aria-label="More" onClick={() => showRoomNotice("More chat options aren't available yet.")}>
+                          <button type="button" aria-label="More" onClick={() => showRoomNotice(DEMO_MESSAGE)}>
                             <DotsIcon size={20} />
                           </button>
                           <button type="submit" className="zc-send" aria-label="Send" disabled={!chatInput.trim()}>

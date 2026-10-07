@@ -7,6 +7,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { CaretUpIcon, MicIcon, MicOffIcon, VideoIcon, VideoOffIcon } from "@/components/RoomIcons";
+import { DEMO_MESSAGE } from "@/lib/demoNotice";
 import type { HostAction, Participant } from "@/lib/meetings";
 
 type Props = {
@@ -23,7 +24,8 @@ type Props = {
 
 type MenuItem = { label: string; run?: () => void } | "divider";
 
-const UNAVAILABLE = (feature: string) => `${feature} isn't available yet.`;
+// The label is kept at call sites for readability; every unavailable action shows the same demo notice.
+const UNAVAILABLE = (_feature: string) => DEMO_MESSAGE;
 const MENU_HEIGHT = 380;
 
 export default function ParticipantsPanel({

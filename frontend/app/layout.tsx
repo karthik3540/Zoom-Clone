@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import MiniMeeting from "@/components/MiniMeeting";
+import DemoNotice from "@/components/DemoNotice";
 
 export const metadata: Metadata = {
   title: "Zoom",
@@ -25,6 +26,8 @@ export default function RootLayout({
         {children}
         {/* The meeting, minimized, while you are on another page */}
         <MiniMeeting />
+        {/* "This is a demo feature..." for buttons that have no feature behind them */}
+        <DemoNotice />
       </body>
     </html>
   );

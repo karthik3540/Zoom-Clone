@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
+import { DEMO_MESSAGE, showDemoNotice } from "@/lib/demoNotice";
 import { getUserId } from "@/lib/identity";
 import {
   ApiError,
@@ -56,6 +57,15 @@ function nowInZone(zone: string): string {
     }).formatToParts(new Date()).map((part) => [part.type, part.value]),
   );
   return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:00`;
+}
+
+/** The default date range of a tab, relative to today. */
+function defaultRange(tab: "Upcoming" | "Previous"): { start: Date; end: Date } {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const other = new Date(today);
+  other.setMonth(other.getMonth() + (tab === "Upcoming" ? 3 : -3));
+  return tab === "Upcoming" ? { start: today, end: other } : { start: other, end: today };
 }
 
 function timeZoneCity(zone: string): string {
@@ -139,25 +149,23 @@ export default function MeetingsPage() {
   const scheduleMenuRef = useRef<HTMLDivElement>(null);
   const toastTimer = useRef<number | null>(null);
 
-  const [noticeToast, setNoticeToast] = useState<string | null>(null);
-  const noticeTimer = useRef<number | null>(null);
-
-  const showNotice = (message: string) => {
-    setNoticeToast(message);
-    if (noticeTimer.current !== null) window.clearTimeout(noticeTimer.current);
-    noticeTimer.current = window.setTimeout(() => setNoticeToast(null), 4000);
-  };
 
   useEffect(() => {
     return () => {
       if (toastTimer.current !== null) window.clearTimeout(toastTimer.current);
-      if (noticeTimer.current !== null) window.clearTimeout(noticeTimer.current);
     };
   }, []);
 
   // Date range filter state
-  const [filterStart, setFilterStart] = useState<Date>(() => new Date(2026, 9, 7)); // Oct 7, 2026
-  const [filterEnd, setFilterEnd] = useState<Date>(() => new Date(2027, 0, 7)); // Jan 7, 2027
+  // Upcoming: today to 3 months ahead; Previous: 3 months back to today (the calendar can change it).
+  const [filterStart, setFilterStart] = useState<Date>(() => defaultRange("Upcoming").start);
+  const [filterEnd, setFilterEnd] = useState<Date>(() => defaultRange("Upcoming").end);
+  useEffect(() => {
+    if (activeTab !== "Upcoming" && activeTab !== "Previous") return;
+    const range = defaultRange(activeTab);
+    setFilterStart(range.start);
+    setFilterEnd(range.end);
+  }, [activeTab]);
   const [calendarOpen, setCalendarOpen] = useState(false);
   const [calendarViewMonth, setCalendarViewMonth] = useState<Date>(() => new Date(2026, 9, 1));
   const [isSelecting, setIsSelecting] = useState(false);
@@ -850,7 +858,7 @@ export default function MeetingsPage() {
             <button
               type="button"
               className="banner-link"
-              onClick={() => showNotice("This is a demo feature and is not available right now.")}
+              onClick={() => showDemoNotice()}
             >
               Discover Zoom Workplace Pro
             </button>
@@ -1158,7 +1166,7 @@ export default function MeetingsPage() {
                                 <button
                                   type="button"
                                   className="upsell-action"
-                                  onClick={() => showNotice("This is a demo feature and is not available right now.")}
+                                  onClick={() => showDemoNotice()}
                                 >
                                   Upgrade to Zoom Workplace Pro
                                 </button>
@@ -1218,7 +1226,7 @@ export default function MeetingsPage() {
         {activeTab !== "Upcoming" && activeTab !== "Previous" && activeTab !== "Personal Room" && (
           <div className="tab-placeholder-box">
             <h3>{activeTab}</h3>
-            <p>No items found in {activeTab}.</p>
+            <p>No items found in {activeTab}. {DEMO_MESSAGE}</p>
           </div>
         )}
 
@@ -1257,12 +1265,6 @@ export default function MeetingsPage() {
           </div>
         )}
 
-        {noticeToast && (
-          <div className="zoom-toast" role="status">
-            <span className="toast-icon">ℹ</span>
-            {noticeToast}
-          </div>
-        )}
 
         {/* Floating Chat Bubble Widget */}
         <button
@@ -1270,6 +1272,7 @@ export default function MeetingsPage() {
           className="floating-chat-bubble"
           aria-label="Chat support"
           title="Zoom Support Chat"
+          onClick={() => showDemoNotice()}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.05 21.95a1 1 0 0 0 1.258 1.258l4.782-1.388A9.956 9.956 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.96 7.96 0 0 1-4.083-1.12.998.998 0 0 0-.64-.176l-3.328.966.966-3.328a1 1 0 0 0-.176-.64A7.957 7.957 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z" />

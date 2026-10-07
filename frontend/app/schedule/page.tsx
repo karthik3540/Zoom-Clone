@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
+import { showDemoNotice } from "@/lib/demoNotice";
 import { getUserId } from "@/lib/identity";
 import {
   AttachmentKind,
@@ -74,27 +75,6 @@ export default function SchedulePage() {
   const [notesScope, setNotesScope] = useState<"organization_only" | "all_participants">("all_participants");
   const [hostVideo, setHostVideo] = useState(false);
   const [participantVideo, setParticipantVideo] = useState(false);
-
-  const [demoNotice, setDemoNotice] = useState<string | null>(null);
-  const demoNoticeTimerRef = useRef<number | null>(null);
-
-  const showDemoNotice = (msg = "This is a demo feature and is not available right now.") => {
-    setDemoNotice(msg);
-    if (demoNoticeTimerRef.current !== null) {
-      window.clearTimeout(demoNoticeTimerRef.current);
-    }
-    demoNoticeTimerRef.current = window.setTimeout(() => {
-      setDemoNotice(null);
-    }, 4000);
-  };
-
-  useEffect(() => {
-    return () => {
-      if (demoNoticeTimerRef.current !== null) {
-        window.clearTimeout(demoNoticeTimerRef.current);
-      }
-    };
-  }, []);
 
   useEffect(() => {
     if (!getUserId()) {
@@ -332,7 +312,7 @@ export default function SchedulePage() {
                       <button
                         type="button"
                         className="zoom-link"
-                        onClick={() => showDemoNotice("This is a demo feature and is not available right now.")}
+                        onClick={() => showDemoNotice()}
                       >
                         Upgrade to Zoom Workplace Pro
                       </button>
@@ -657,7 +637,7 @@ export default function SchedulePage() {
               <div className="zoom-form-row">
                 <div className="zoom-form-label">Options</div>
                 <div className="zoom-form-content">
-                  <button type="button" className="zoom-link-button font-normal">
+                  <button type="button" className="zoom-link-button font-normal" onClick={() => showDemoNotice()}>
                     Show
                   </button>
                 </div>
@@ -687,13 +667,6 @@ export default function SchedulePage() {
               Cancel
             </button>
           </div>
-
-          {demoNotice && (
-            <div className="zoom-toast" role="status">
-              <span className="toast-icon">ℹ</span>
-              {demoNotice}
-            </div>
-          )}
         </div>
       </main>
 

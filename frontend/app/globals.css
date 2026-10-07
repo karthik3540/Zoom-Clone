@@ -234,97 +234,6 @@ button:focus-visible {
   font-size: 14px;
 }
 
-.join-started-page {
-  min-height: calc(100vh - 74px);
-  position: relative;
-  display: flex;
-  justify-content: center;
-  background: #ffffff;
-}
-
-.join-started-card {
-  width: 470px;
-  margin-top: 260px;
-  text-align: center;
-}
-
-.join-started-card h1 {
-  margin: 0 0 82px;
-  font-size: 28px;
-}
-
-.join-option-row {
-  position: relative;
-}
-
-.join-app-button,
-.join-browser-button {
-  width: 100%;
-  height: 56px;
-  border-radius: 10px;
-  font-size: 16px;
-}
-
-.join-app-button {
-  background: #1475df;
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.join-browser-button {
-  margin-top: 24px;
-  border: 1px solid #c8ced8;
-  background: #ffffff;
-  color: #333842;
-}
-
-.join-started-card p {
-  margin: 24px 0 0;
-  color: #26354c;
-  font-size: 16px;
-}
-
-.join-started-card a { color: #1475df; }
-
-.join-terms { margin-top: 34px !important; }
-
-.join-app-notice {
-  position: absolute;
-  left: calc(100% + 14px);
-  top: -24px;
-  width: 420px;
-  padding: 16px 42px 16px 16px;
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
-  text-align: left;
-}
-
-.join-app-notice strong,
-.join-app-notice span { display: block; }
-.join-app-notice span { margin-top: 6px; color: #4d5560; line-height: 1.35; }
-.join-app-notice button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
-  border: 2px solid #4c96f8;
-  border-radius: 50%;
-  background: #ffffff;
-  color: #5e6874;
-  font-size: 22px;
-}
-
-.join-footer {
-  position: absolute;
-  bottom: 38px;
-  color: #7c8490;
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
 /* Sign-in page */
 .signin-header {
   height: 86px;
@@ -528,9 +437,6 @@ button.forgot-link {
 
   .join-card, .signin-panel { width: min(430px, calc(100vw - 32px)); }
   .join-card { margin-top: 90px; }
-  .join-app-notice { position: static; width: 100%; margin-top: 12px; }
-  .join-started-card { width: min(470px, calc(100vw - 32px)); margin-top: 120px; }
-  .join-footer { position: static; margin: 70px 16px 24px; }
 }
 
 
