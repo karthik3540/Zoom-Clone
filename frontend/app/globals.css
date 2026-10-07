@@ -4767,3 +4767,27 @@ button.zw-rail-item:focus-visible { outline: 2px solid #0b5cff; outline-offset: 
   color: #fff; cursor: pointer;
 }
 .zr-limit-banner button:hover { background: #2a2a2a; }
+
+/* Dashboard: Recent meetings */
+/* Grows with the list (the empty state keeps the card's original height). */
+.recent-card { height: auto; min-height: 359px; }
+.recent-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.recent-header h2 { margin: 0; }
+.recent-loading { margin: 24px 0; color: #6e7680; font-size: 14px; text-align: center; }
+.recent-list { display: flex; flex-direction: column; margin: 8px 0 0; padding: 0; list-style: none; }
+.recent-item {
+  display: flex; align-items: center; gap: 14px; padding: 12px 8px; border-radius: 10px; color: #131619;
+  text-decoration: none;
+}
+a.recent-item:hover { background: #f5f7f9; }
+a.recent-item:focus-visible { outline: 2px solid #0b5cff; outline-offset: 1px; }
+.recent-item-icon {
+  display: grid; place-items: center; flex: 0 0 36px; height: 36px; border-radius: 10px; background: #fff1e8; color: #f26d21;
+}
+.recent-item-text { display: flex; flex: 1; flex-direction: column; gap: 2px; min-width: 0; }
+.recent-item-title { overflow: hidden; font-size: 15px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.recent-item-meta { color: #6e7680; font-size: 13px; }
+.recent-item-id { flex-shrink: 0; color: #6e7680; font-size: 13px; font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) {
+  .recent-item-id { display: none; }
+}
