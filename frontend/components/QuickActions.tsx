@@ -5,7 +5,7 @@ import Link from "next/link";
 import { formatMeetingId, getCurrentUser, useHostMeeting } from "@/lib/meetings";
 
 export default function QuickActions() {
-  // Schedule, Join and Host each open in a new tab.
+  // Schedule, Join and New Meeting each open in a new tab.
   const { host, starting, error } = useHostMeeting({ newTab: true });
   // The signed-in user's permanent Personal Meeting ID, e.g. "603 678 7109".
   const [pmi, setPmi] = useState<string | null>(null);
@@ -50,7 +50,7 @@ export default function QuickActions() {
         </Link>
 
 
-        {/* Host */}
+        {/* New Meeting */}
         <a
           href="#"
           role="button"
@@ -85,7 +85,7 @@ export default function QuickActions() {
 
           </span>
 
-          <span>Host</span>
+          <span>New Meeting</span>
         </a>
 
       </div>
