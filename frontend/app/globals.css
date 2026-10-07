@@ -1,0 +1,4769 @@
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+
+  background: #ffffff;
+  color: #111111;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+  border: 0;
+  outline: 0;
+}
+
+button:focus-visible {
+  outline: 2px solid #0b5cff;
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.zoom-app {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.top-header {
+  width: 100%;
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 24px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e6e6e6;
+
+  position: relative;
+  z-index: 100;
+}
+
+
+/* =========================================================
+   ZOOM LOGO
+========================================================= */
+
+.header-left {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.zoom-logo {
+  margin: 0;
+  padding: 0;
+
+  color: #0b5cff;
+
+  background: transparent;
+
+  font-size: 40px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -3px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   HEADER RIGHT
+========================================================= */
+
+.header-right {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+
+  flex-shrink: 0;
+}
+
+.header-right > a {
+  color: #5d5f80;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+.header-right > a:hover {
+  color: #0b5cff;
+}
+
+.header-button {
+  padding: 0;
+  background: transparent;
+  color: #5d5f80;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.header-button:hover {
+  color: #0b5cff;
+}
+
+/* Join page */
+.join-page {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.join-card {
+  width: 430px;
+  margin-top: 140px;
+}
+
+.join-card h1 {
+  margin: 0 0 58px;
+  text-align: center;
+  font-size: 28px;
+}
+
+.join-card label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.join-card input {
+  width: 100%;
+  height: 54px;
+  padding: 0 18px;
+  border: 1px solid #cfd5dc;
+  border-radius: 14px;
+  outline: none;
+  font-size: 17px;
+}
+
+.join-card input:focus {
+  border-color: #3185f6;
+  box-shadow: 0 0 0 2px #8abaff;
+}
+
+.join-card input::placeholder { color: #7b8494; }
+
+.join-card > button {
+  width: 100%;
+  height: 46px;
+  margin-top: 16px;
+  border-radius: 12px;
+  background: #edeef3;
+  color: #9b9da5;
+  font-size: 17px;
+}
+
+.join-card > button:not(:disabled) {
+  background: #0b72e7;
+  color: #ffffff;
+}
+
+.join-card > a {
+  display: block;
+  margin-top: 84px;
+  color: #0875e5;
+  text-align: center;
+  font-size: 16px;
+}
+
+.join-header {
+  height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(28px, calc((100vw - 1600px) / 2));
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.join-header nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.join-header nav a,
+.join-header nav button {
+  border: 0;
+  background: transparent;
+  color: #0b72e7;
+  font-size: 14px;
+}
+
+.join-started-page {
+  min-height: calc(100vh - 74px);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.join-started-card {
+  width: 470px;
+  margin-top: 260px;
+  text-align: center;
+}
+
+.join-started-card h1 {
+  margin: 0 0 82px;
+  font-size: 28px;
+}
+
+.join-option-row {
+  position: relative;
+}
+
+.join-app-button,
+.join-browser-button {
+  width: 100%;
+  height: 56px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.join-app-button {
+  background: #1475df;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.join-browser-button {
+  margin-top: 24px;
+  border: 1px solid #c8ced8;
+  background: #ffffff;
+  color: #333842;
+}
+
+.join-started-card p {
+  margin: 24px 0 0;
+  color: #26354c;
+  font-size: 16px;
+}
+
+.join-started-card a { color: #1475df; }
+
+.join-terms { margin-top: 34px !important; }
+
+.join-app-notice {
+  position: absolute;
+  left: calc(100% + 14px);
+  top: -24px;
+  width: 420px;
+  padding: 16px 42px 16px 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  text-align: left;
+}
+
+.join-app-notice strong,
+.join-app-notice span { display: block; }
+.join-app-notice span { margin-top: 6px; color: #4d5560; line-height: 1.35; }
+.join-app-notice button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #4c96f8;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #5e6874;
+  font-size: 22px;
+}
+
+.join-footer {
+  position: absolute;
+  bottom: 38px;
+  color: #7c8490;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Sign-in page */
+.signin-header {
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 62px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.signin-header nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #202735;
+  font-size: 16px;
+}
+
+.signin-header nav a,
+.signin-header nav button { color: #0875e5; }
+.signin-header nav button { border: 0; background: transparent; font-size: 16px; }
+
+.signin-page {
+  min-height: calc(100vh - 86px);
+  display: grid;
+  grid-template-columns: 42% 58%;
+  background: #ffffff;
+}
+
+.signin-promo {
+  position: relative;
+  min-height: 900px;
+  overflow: hidden;
+  background: #f4f7f9;
+}
+
+.promo-content {
+  position: absolute;
+  left: 29%;
+  top: 30%;
+  width: 680px;
+  height: 480px;
+  padding: 65px 40px;
+  overflow: hidden;
+  background: #1460f5;
+  color: #ffffff;
+}
+
+.promo-wordmark { position: relative; z-index: 1; font-size: 70px; font-weight: 700; letter-spacing: -5px; }
+.promo-content p { position: relative; z-index: 1; max-width: 280px; margin: 22px 0 0; font-size: 18px; line-height: 1.4; }
+.promo-content strong { position: relative; z-index: 1; display: block; margin-top: 32px; font-size: 18px; }
+.promo-content button { position: relative; z-index: 1; margin-top: 48px; padding: 12px 28px; border-radius: 22px; background: #ffffff; color: #1460f5; font-weight: 700; }
+.promo-orb { position: absolute; z-index: 0; border: 28px solid rgba(255,255,255,.65); border-radius: 50%; filter: blur(1px); }
+.promo-orb-one { width: 420px; height: 420px; right: -100px; top: 30px; }
+.promo-orb-two { width: 280px; height: 280px; right: 80px; bottom: -120px; border-color: rgba(75,190,255,.6); }
+
+.signin-panel {
+  width: 430px;
+  margin: 235px auto 0;
+  text-align: center;
+}
+
+.signin-panel h1 { margin: 0 0 40px; font-size: 38px; }
+.signin-panel form { text-align: left; }
+.signin-panel label { display: block; margin: 0 0 8px 14px; color: #657080; font-size: 14px; }
+.signin-panel input { width: 100%; height: 56px; padding: 0 14px; border: 2px solid #5a9bff; border-radius: 14px; font-size: 18px; outline: none; }
+.signin-panel form button { width: 100%; height: 48px; margin-top: 16px; border-radius: 12px; background: #1475df; color: #fff; font-size: 16px; }
+.signin-panel form button:disabled { background: #cfd3dc; }
+.signin-error { margin: 8px 0 0 14px; color: #d93025; font-size: 14px; }
+.signin-divider { display: flex; align-items: center; gap: 14px; margin: 38px 0 26px; color: #777f8b; }
+.signin-divider::before, .signin-divider::after { content: ""; height: 1px; flex: 1; background: #e0e3e8; }
+.signin-providers { display: flex; justify-content: space-between; color: #4c5868; font-size: 13px; }
+.signin-providers span::before { content: "●"; display: block; width: 48px; height: 48px; margin: 0 auto 8px; padding-top: 14px; border: 1px solid #e4e7eb; border-radius: 50%; color: #1460f5; font-size: 18px; }
+.forgot-link { display: block; margin-top: 250px; color: #0875e5; }
+.signin-links { margin-top: 34px; color: #0875e5; }
+.recaptcha-note { margin-top: 24px; color: #7c8490; font-size: 13px; line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .signin-page { display: block; }
+  .signin-promo { display: none; }
+  .signin-panel { margin: 120px auto 40px; padding: 0 20px; }
+}
+
+/* Responsive layouts: laptop, tablet, and phone */
+@media (max-width: 1200px) {
+  .dashboard { padding: 28px 24px 60px; }
+  .dashboard-grid { grid-template-columns: minmax(0, 1fr) 300px; }
+  .schedule-container { padding-right: 28px; }
+}
+
+@media (max-width: 900px) {
+  .top-header { padding: 0 16px; }
+  .header-right { gap: 16px; }
+  .header-right > a:first-child { display: none; }
+
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .dashboard-right { display: grid; grid-template-columns: 1fr 1fr; }
+
+  .sidebar { width: 190px; min-width: 190px; }
+  .sidebar-item, .sidebar-home { padding-left: 20px; }
+
+  .meeting-details-main { padding: 28px 32px 70px; }
+  .details-content-wrapper { max-width: 100%; }
+
+  .schedule-container { padding: 26px 28px 60px; }
+  .schedule-row { max-width: 100%; }
+  .duration-warning { width: 100%; }
+}
+
+@media (max-width: 650px) {
+  .top-header { height: 64px; }
+  .zoom-logo { font-size: 32px; }
+  .header-right { gap: 10px; }
+  .header-right > a { font-size: 14px; }
+  .header-dropdown { display: none; }
+  .profile-button { width: 38px; height: 38px; }
+
+  .app-body { min-height: calc(100vh - 64px); }
+  .sidebar { width: 84px; min-width: 84px; }
+  .sidebar-home, .sidebar-item { padding-left: 12px; font-size: 13px; }
+  .sidebar-section-title { display: none; }
+
+  .dashboard { padding: 20px 12px 40px; }
+  .dashboard-right { grid-template-columns: 1fr; }
+  .profile-card { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .profile-actions { align-items: flex-start; }
+
+  .schedule-container { padding: 20px 16px 50px; }
+  .form-row { grid-template-columns: 1fr; gap: 7px; }
+  .form-label { padding-top: 0; }
+  .when-controls { flex-wrap: wrap; }
+  .date-input, .time-select, .ampm-select { width: 100%; max-width: 100%; }
+  .duration-controls { flex-wrap: wrap; }
+  .duration-hour, .duration-minute { width: 130px; }
+
+  .meeting-details-main { padding: 22px 18px 55px; }
+  .details-breadcrumb { flex-wrap: wrap; }
+  .details-tabs-container { margin-bottom: 30px; }
+  .details-table { margin-left: 0; gap: 28px; }
+  .detail-row { grid-template-columns: 1fr; gap: 7px; }
+  .calendar-links-row { align-items: flex-start; }
+  .invite-link-row { flex-wrap: wrap; }
+  .meeting-chat-sidebar { position: absolute; right: 0; top: 0; bottom: 0; width: min(320px, 90vw); }
+
+  .join-card, .signin-panel { width: min(430px, calc(100vw - 32px)); }
+  .join-card { margin-top: 90px; }
+  .join-app-notice { position: static; width: 100%; margin-top: 12px; }
+  .join-started-card { width: min(470px, calc(100vw - 32px)); margin-top: 120px; }
+  .join-footer { position: static; margin: 70px 16px 24px; }
+}
+
+
+/* =========================================================
+   HOST DROPDOWN
+========================================================= */
+
+.header-dropdown {
+  position: relative;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.header-dropdown-button {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+
+  color: #5d5f80;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+.header-dropdown-button:hover {
+  color: #0b5cff;
+}
+
+
+/* =========================================================
+   HOST ARROW
+========================================================= */
+
+.host-chevron {
+  width: 7px;
+  height: 7px;
+
+  display: block;
+
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+
+  transform: rotate(45deg);
+
+  margin-top: -4px;
+}
+
+.host-chevron-open {
+  transform: rotate(225deg);
+
+  margin-top: 4px;
+}
+
+
+/* =========================================================
+   HOST MENU
+========================================================= */
+
+.host-menu {
+  position: absolute;
+
+  top: 64px;
+  right: -20px;
+
+  width: 260px;
+
+  padding: 7px 0;
+
+  background: #ffffff;
+
+  border: 1px solid #d9dde2;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.13);
+
+  z-index: 9999;
+
+  overflow: hidden;
+}
+
+.host-menu button {
+  width: 100%;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+
+  margin: 0;
+  padding: 0 24px;
+
+  background: #ffffff;
+
+  color: #333333;
+
+  font-size: 17px;
+  font-weight: 400;
+
+  line-height: 1;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.host-menu button:hover {
+  background: #f5f7f9;
+}
+
+
+/* =========================================================
+   PROFILE BUTTON
+========================================================= */
+
+.profile-button {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border-radius: 12px;
+
+  background: #465d68;
+
+  color: #ffffff;
+
+  font-size: 21px;
+  font-weight: 400;
+
+  line-height: 1;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.app-body {
+  width: 100%;
+  min-height: calc(100vh - 72px);
+
+  display: flex;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+  width: 303px;
+  min-width: 303px;
+
+  min-height: calc(100vh - 72px);
+
+  padding-top: 10px;
+
+  background: #f7f7f9;
+
+  border-right: 1px solid #eeeeef;
+}
+
+.sidebar-collapsed {
+  width: 48px;
+  min-width: 48px;
+  overflow: hidden;
+}
+
+.sidebar-collapsed > * {
+  visibility: hidden;
+}
+
+
+/* =========================================================
+   HOME ONLY
+========================================================= */
+
+.sidebar-home {
+  width: calc(100% - 8px);
+  height: 46px;
+
+  margin-left: 4px;
+
+  padding-left: 31px;
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 24px;
+
+  background: #eef6ff;
+
+  color: #005cff;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.sidebar-home:hover {
+  background: #e7f2ff;
+}
+
+
+/* =========================================================
+   MAIN DASHBOARD
+========================================================= */
+
+.dashboard {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 38px 80px 80px 170px;
+
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   DASHBOARD GRID
+========================================================= */
+
+.dashboard-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    332px;
+
+  gap: 24px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   LEFT COLUMN
+========================================================= */
+
+.dashboard-main {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+
+/* =========================================================
+   RIGHT COLUMN
+========================================================= */
+
+.dashboard-right {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.profile-card {
+  width: 100%;
+  height: 129px;
+
+  padding: 20px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #ffffff;
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   PROFILE LEFT
+========================================================= */
+
+.profile-left {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   AVATAR
+========================================================= */
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 19px;
+
+  background: #465d68;
+
+  color: #ffffff;
+
+  font-size: 42px;
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   PROFILE INFO
+========================================================= */
+
+.profile-info {
+  min-width: 0;
+}
+
+.profile-info h1 {
+  margin: 0 0 5px;
+
+  color: #0c0c12;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  line-height: 1.1;
+
+  white-space: nowrap;
+}
+
+.profile-info p {
+  margin: 0;
+
+  color: #171e46;
+
+  font-size: 15px;
+
+  line-height: 1.3;
+}
+
+.profile-info strong {
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   PROFILE ACTIONS
+========================================================= */
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   MANAGE PLAN
+   Original compact Zoom-style button
+========================================================= */
+
+.manage-plan,
+.plan-details {
+  width: 130px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border-radius: 12px;
+
+  background: #f0f3f5;
+
+  color: #005cff;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.manage-plan:hover,
+.plan-details:hover {
+  background: #e9edf0;
+}
+
+.plan-details {
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   RECENT ACTIVITY CARD
+========================================================= */
+
+.recent-card {
+  width: 100%;
+  height: 359px;
+
+  padding: 24px 25px;
+
+  background: #ffffff;
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.recent-card h2 {
+  margin: 0;
+
+  color: #0b0b10;
+
+  font-size: 25px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.card-divider {
+  width: 100%;
+  height: 2px;
+
+  margin-top: 19px;
+
+  background: #f1f1f4;
+}
+
+
+/* =========================================================
+   EMPTY ACTIVITY
+========================================================= */
+
+.empty-activity {
+  width: 100%;
+  height: 286px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 28px;
+}
+
+.empty-activity p {
+  margin: 0;
+
+  color: #101014;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   PACKAGE / EMPTY ICON
+========================================================= */
+
+.package-icon {
+  position: relative;
+
+  width: 150px;
+  height: 105px;
+}
+
+.package-top {
+  position: absolute;
+
+  left: 26px;
+  top: 4px;
+
+  width: 98px;
+  height: 42px;
+
+  background: #3189eb;
+
+  clip-path: polygon(
+    50% 0%,
+    100% 30%,
+    50% 61%,
+    0% 30%
+  );
+}
+
+.package-body {
+  position: absolute;
+
+  left: 31px;
+  top: 35px;
+
+  width: 88px;
+  height: 58px;
+
+  background: #1473df;
+
+  clip-path: polygon(
+    0% 0%,
+    50% 28%,
+    100% 0%,
+    100% 72%,
+    50% 100%,
+    0% 72%
+  );
+}
+
+.package-body span {
+  position: absolute;
+
+  left: 42px;
+  top: 10px;
+
+  width: 4px;
+  height: 47px;
+
+  background: #0c5fc7;
+}
+
+
+/* =========================================================
+   QUICK ACTIONS CARD
+========================================================= */
+
+.quick-actions-card {
+  width: 100%;
+  height: 207px;
+
+  padding: 24px;
+
+  background: #ffffff;
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08);
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   QUICK ACTION ROW
+========================================================= */
+
+.quick-actions {
+  width: 100%;
+  height: 78px;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  align-items: start;
+  justify-items: center;
+
+  margin: 0 0 25px;
+}
+
+
+/* =========================================================
+   QUICK ACTION BUTTON
+========================================================= */
+
+.quick-action {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+
+  color: #5d6080;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   ACTION ICON BOX
+========================================================= */
+
+.action-icon {
+  width: 51px;
+  height: 51px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SCHEDULE
+========================================================= */
+
+.schedule-icon {
+  background: #1674e8;
+}
+
+.calendar-icon {
+  position: relative;
+
+  width: 23px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border-radius: 5px;
+}
+
+.calendar-icon::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 6px;
+
+  width: 100%;
+  height: 2px;
+
+  background: #1674e8;
+}
+
+.calendar-icon::after {
+  content: "";
+
+  position: absolute;
+
+  left: 5px;
+  top: -3px;
+
+  width: 13px;
+  height: 6px;
+
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
+
+  border-radius: 2px;
+}
+
+.calendar-number {
+  position: relative;
+
+  z-index: 2;
+
+  margin-top: 5px;
+
+  color: #1674e8;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   JOIN
+========================================================= */
+
+.join-icon {
+  background: #1674e8;
+}
+
+.plus-icon {
+  width: 21px;
+  height: 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+
+  background: #ffffff;
+
+  color: #1674e8;
+
+  font-size: 18px;
+  font-weight: 500;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   HOST VIDEO ICON
+========================================================= */
+
+.host-icon {
+  background: #f26922;
+}
+
+.video-camera-svg {
+  width: 27px;
+  height: 21px;
+
+  display: block;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   PERSONAL MEETING ID
+========================================================= */
+
+.meeting-id {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.meeting-id h3 {
+  margin: 0 0 8px;
+
+  color: #111117;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.meeting-id-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  color: #111117;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   COPY BUTTON
+========================================================= */
+
+.copy-button {
+  position: relative;
+
+  width: 19px;
+  height: 19px;
+
+  margin: 0;
+  padding: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.copy-square {
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  border: 1.5px solid #667078;
+
+  border-radius: 2px;
+
+  background: transparent;
+}
+
+.copy-back {
+  left: 2px;
+  top: 6px;
+}
+
+.copy-front {
+  left: 7px;
+  top: 2px;
+}
+
+
+/* =========================================================
+   MEETINGS CARD
+========================================================= */
+
+.meetings-card {
+  width: 100%;
+  height: auto;
+  min-height: 190px;
+
+  padding: 24px;
+
+  background: #ffffff;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   MEETINGS HEADER
+========================================================= */
+
+.meetings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 21px;
+}
+
+.meetings-header h2 {
+  margin: 0;
+
+  color: #101015;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+.meetings-header button {
+  padding: 0;
+
+  background: transparent;
+
+  color: #005cff;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.meetings-header button:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   NO UPCOMING MEETINGS
+========================================================= */
+
+.no-meetings {
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 10px;
+
+  border-radius: 10px;
+
+  background: #f5f7f8;
+
+  color: #111117;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   TEST AUDIO
+========================================================= */
+
+.test-audio {
+  display: block;
+
+  height: 33px;
+
+  margin: 16px auto 0;
+
+  padding: 0 15px;
+
+  border-radius: 15px;
+
+  background: #f0f3f5;
+
+  color: #005cff;
+
+  font-size: 13px;
+  font-weight: 400;
+
+  cursor: pointer;
+}
+
+.test-audio:hover {
+  background: #e8edf1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1500px) {
+  .dashboard {
+    padding-left: 100px;
+    padding-right: 60px;
+  }
+}
+
+
+@media (max-width: 1250px) {
+  .dashboard {
+    padding-left: 50px;
+    padding-right: 40px;
+  }
+
+  .header-right {
+    gap: 22px;
+  }
+}
+
+
+@media (max-width: 1050px) {
+  .dashboard {
+    padding: 30px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-right {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 24px;
+  }
+}
+
+
+@media (max-width: 800px) {
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+
+  .dashboard {
+    padding: 25px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+@media (max-width: 650px) {
+  .sidebar {
+    width: 90px;
+    min-width: 90px;
+  }
+
+  .sidebar-home {
+    padding-left: 20px;
+  }
+
+  .dashboard {
+    padding: 20px 15px;
+  }
+
+  .dashboard-right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-card {
+    height: auto;
+    min-height: 129px;
+
+    gap: 20px;
+  }
+
+  .profile-info h1 {
+    font-size: 20px;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .sidebar {
+    display: none;
+  }
+
+  .dashboard {
+    width: 100%;
+    padding: 20px 12px;
+  }
+
+  .header-right {
+    gap: 13px;
+  }
+
+  .header-right > a,
+  .header-dropdown-button {
+    font-size: 14px;
+  }
+
+  .zoom-logo {
+    font-size: 34px;
+  }
+
+  .profile-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .host-menu {
+    right: -10px;
+    width: 250px;
+  }
+}
+/* =========================================================
+   SCHEDULE PAGE
+========================================================= */
+
+.schedule-page {
+  min-height: calc(100vh - 72px);
+
+  display: flex;
+
+  background: #ffffff;
+}
+
+
+/* ONLY HOME SIDEBAR */
+
+.schedule-sidebar {
+  width: 303px;
+  min-width: 303px;
+
+  min-height: calc(100vh - 72px);
+
+  padding-top: 10px;
+
+  background: #f7f7f9;
+
+  border-right: 1px solid #eeeeef;
+}
+
+.schedule-home {
+  width: calc(100% - 8px);
+  height: 46px;
+
+  margin-left: 4px;
+
+  padding-left: 31px;
+
+  display: flex;
+  align-items: center;
+
+  border: 0;
+  border-radius: 24px;
+
+  background: #eef6ff;
+
+  color: #005cff;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.schedule-home:hover {
+  background: #e7f2ff;
+}
+
+
+/* =========================================================
+   SCHEDULE CONTENT
+========================================================= */
+
+.schedule-content {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 30px 70px 80px 30px;
+
+  color: #151515;
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+.back-meetings {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin: 0 0 22px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #0065e8;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.back-meetings span {
+  font-size: 22px;
+  line-height: 12px;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.schedule-title {
+  margin: 0 0 27px;
+
+  font-size: 21px;
+  font-weight: 700;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   FORM ROW
+========================================================= */
+
+.schedule-row {
+  width: 100%;
+  max-width: 980px;
+
+  display: grid;
+
+  grid-template-columns: 145px minmax(0, 1fr);
+
+  align-items: start;
+
+  column-gap: 25px;
+
+  margin-bottom: 25px;
+}
+
+.schedule-row > label:first-child {
+  padding-top: 9px;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  line-height: 1.3;
+}
+
+.required {
+  color: #e53935;
+  margin-right: 4px;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.schedule-input,
+.schedule-select {
+  width: 100%;
+  height: 33px;
+
+  padding: 0 11px;
+
+  border: 1px solid #cfd5dc;
+
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  color: #171717;
+
+  font-size: 14px;
+
+  outline: none;
+}
+
+.schedule-input:focus,
+.schedule-select:focus {
+  border-color: #2684ff;
+
+  box-shadow:
+    0 0 0 1px #2684ff;
+}
+
+.topic-input {
+  max-width: 490px;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.schedule-field-column {
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+}
+
+.add-description {
+  margin-top: 22px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #0065e8;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   WHEN
+========================================================= */
+
+.when-fields {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.input-with-icon {
+  position: relative;
+
+  width: 241px;
+}
+
+.date-input {
+  width: 100%;
+}
+
+.calendar-small {
+  position: absolute;
+
+  right: 10px;
+  top: 8px;
+
+  color: #65707b;
+
+  font-size: 13px;
+}
+
+.time-input {
+  width: 198px;
+}
+
+.ampm-input {
+  width: 105px;
+}
+
+
+/* =========================================================
+   DURATION
+========================================================= */
+
+.duration-fields {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: #222;
+
+  font-size: 14px;
+}
+
+.duration-hour {
+  width: 150px;
+}
+
+.duration-minute {
+  width: 150px;
+}
+
+
+/* =========================================================
+   WARNING
+========================================================= */
+
+.plan-warning {
+  width: 810px;
+
+  min-height: 76px;
+
+  margin: 0 0 24px 170px;
+
+  padding: 16px;
+
+  display: flex;
+
+  gap: 12px;
+
+  border: 1px solid #f1c89c;
+
+  border-radius: 13px;
+
+  background: #fffdf9;
+
+  color: #292929;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+.warning-icon {
+  color: #ed8b00;
+
+  font-size: 21px;
+
+  flex-shrink: 0;
+}
+
+.plan-warning button {
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #0065e8;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   TIMEZONE
+========================================================= */
+
+.timezone-input {
+  max-width: 490px;
+}
+
+
+/* =========================================================
+   CHECKBOXES
+========================================================= */
+
+.checkbox-row {
+  align-items: center;
+}
+
+.checkbox-label {
+  display: flex !important;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding-top: 0 !important;
+
+  cursor: pointer;
+}
+
+.checkbox-label input {
+  width: 17px;
+  height: 17px;
+
+  accent-color: #1976e8;
+}
+
+
+/* =========================================================
+   RADIO
+========================================================= */
+
+.radio-group {
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+
+  min-height: 33px;
+}
+
+.radio-option {
+  display: flex !important;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding-top: 0 !important;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+.radio-option input {
+  width: 17px;
+  height: 17px;
+
+  margin: 0;
+
+  accent-color: #1674e8;
+}
+
+
+/* =========================================================
+   RESOURCES
+========================================================= */
+
+.add-resource {
+  height: 33px;
+
+  padding: 0 14px;
+
+  border: 0;
+
+  border-radius: 11px;
+
+  background: #f0f3f5;
+
+  color: #0065e8;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.info-icon {
+  color: #777;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+.security-content {
+  max-width: 650px;
+}
+
+.passcode-line {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.passcode-line input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+
+  accent-color: #1976e8;
+}
+
+.passcode-input {
+  width: 130px;
+  height: 37px;
+
+  margin-left: 4px;
+
+  padding: 0 11px;
+
+  border: 1px solid #cfd5dc;
+
+  border-radius: 11px;
+
+  font-size: 14px;
+}
+
+.security-content p {
+  margin: 5px 0 18px 27px;
+
+  color: #68758a;
+
+  font-size: 14px;
+}
+
+.waiting-room {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-left: 0;
+
+  font-size: 14px;
+}
+
+.waiting-room input {
+  width: 17px;
+  height: 17px;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.schedule-divider {
+  width: calc(100% - 170px);
+  max-width: 810px;
+
+  margin: 40px 0 40px 170px;
+
+  border: 0;
+
+  border-top: 1px solid #ededed;
+}
+
+
+/* =========================================================
+   NOTES
+========================================================= */
+
+.notes-options {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.nested {
+  margin-left: 28px;
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.video-options {
+  display: flex;
+  flex-direction: column;
+
+  gap: 13px;
+}
+
+.video-options > div {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.video-options > div > span {
+  width: 120px;
+}
+
+.video-options label {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  font-size: 14px;
+}
+
+.video-options input {
+  width: 17px;
+  height: 17px;
+
+  accent-color: #1976e8;
+}
+
+
+/* =========================================================
+   SHOW OPTIONS
+========================================================= */
+
+.show-options {
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #0065e8;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   SAVE / CANCEL
+========================================================= */
+
+.schedule-actions {
+  margin: 40px 0 0 170px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.save-button,
+.cancel-button {
+  height: 36px;
+
+  padding: 0 17px;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+.save-button {
+  background: #0b6fe8;
+
+  color: #ffffff;
+}
+
+.cancel-button {
+  background: #f0f3f5;
+
+  color: #0065e8;
+}
+/* =========================================
+   FULL ZOOM SIDEBAR
+========================================= */
+
+.sidebar {
+  width: 306px;
+  min-width: 306px;
+  min-height: calc(100vh - 72px);
+  background: #f7f7f9;
+  padding: 20px 0 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-home {
+  height: 45px;
+  margin: 0 6px 22px;
+  padding: 0 34px;
+  display: flex;
+  align-items: center;
+  color: #17171b;
+  background: transparent;
+  border-radius: 0;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.sidebar-section-title {
+  padding: 0 14px;
+  margin-bottom: 5px;
+  color: #737783;
+  font-size: 13px;
+}
+
+.sidebar-item {
+  min-height: 40px;
+  padding: 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #202126;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sidebar-item.active {
+  color: #0067df;
+  background: #eaf4ff;
+}
+
+.sidebar-item:hover {
+  background: #eef4fa;
+}
+
+.sidebar-item.external span:last-child {
+  font-size: 18px;
+  color: #555b64;
+}
+
+.new-badge {
+  margin-left: auto;
+  padding: 1px 6px;
+  border: 1px solid #7ba7ff;
+  border-radius: 10px;
+  color: #246cff !important;
+  font-size: 11px !important;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.sidebar-collapse {
+  min-height: 40px;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  color: #202126;
+  font-size: 16px;
+}
+
+.upgrade-button {
+  display: block;
+  margin: 35px auto 0;
+  height: 38px;
+  padding: 0 18px;
+  border: 1px solid #18d9e7;
+  border-radius: 22px;
+  background: #e8fbff;
+  color: #0068e8;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* =========================================
+   MEETINGS LIST
+========================================= */
+
+.meetings-layout {
+  display: flex;
+  min-height: calc(100vh - 72px);
+}
+
+.meetings-main {
+  flex: 1;
+  padding: 30px 34px;
+  min-width: 0;
+}
+
+.meetings-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meetings-top h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.schedule-button {
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 9px;
+  background: #0b72e7;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.schedule-arrow {
+  border-left: 1px solid rgba(255,255,255,.5);
+  padding-left: 10px;
+}
+
+.plan-warning {
+  margin-top: 24px;
+  padding: 10px;
+  min-height: 57px;
+  background: #f5f7f8;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.plan-warning a {
+  color: #0067df;
+  text-decoration: none;
+}
+
+.meeting-tabs {
+  margin-top: 30px;
+  height: 50px;
+  border-bottom: 1px solid #d8dce1;
+  display: flex;
+  align-items: stretch;
+  gap: 32px;
+}
+
+.tab {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: #68717b;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+}
+
+.tab.active {
+  color: #0067df;
+}
+
+.tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #0067df;
+}
+
+.date-filter {
+  margin-top: 14px;
+  width: 278px;
+  height: 35px;
+  border: 1px solid #aeb6c0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.help {
+  width: 17px;
+  height: 17px;
+  border: 1px solid #89919a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  color: #65707b;
+}
+
+.today-title {
+  margin-top: 25px;
+  height: 40px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  background: #f5f7f8;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.meeting-row {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 0;
+  padding: 25px 10px;
+  text-decoration: none;
+  color: #17181d;
+  border-bottom: 1px solid #f0f1f2;
+}
+
+.meeting-row:hover {
+  background: #fafcff;
+}
+
+.meeting-time {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.meeting-time strong {
+  font-size: 17px;
+}
+
+.meeting-time span {
+  color: #6c7783;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.upgrade-small {
+  width: 255px;
+  padding: 8px;
+  background: #f5f7f8;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.upgrade-small strong {
+  color: #222;
+  font-size: 14px;
+}
+
+.upgrade-small span {
+  color: #0067df;
+  font-size: 14px;
+}
+
+.meeting-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 2px;
+}
+
+.meeting-info strong {
+  font-size: 17px;
+}
+
+.meeting-info span {
+  color: #6c7783;
+  font-size: 14px;
+}
+
+.calendar-footer {
+  margin-top: 255px;
+  padding-top: 30px;
+  border-top: 1px solid #eceef0;
+  font-size: 16px;
+}
+
+/* =========================================
+   MEETING DETAILS
+========================================= */
+
+.meeting-details-layout {
+  display: flex;
+  min-height: calc(100vh - 72px);
+}
+
+.meeting-details-main {
+  flex: 1;
+  padding: 32px 54px;
+  min-width: 0;
+}
+
+.details-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  margin-bottom: 28px;
+}
+
+.details-breadcrumb a {
+  color: #0067df;
+  text-decoration: none;
+}
+
+.details-tabs {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 25px;
+}
+
+.details-tab {
+  height: 36px;
+  padding: 0 18px;
+  border: 0;
+  background: transparent;
+  border-radius: 7px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.details-tab.active {
+  color: #0067df;
+  background: #eaf4ff;
+  box-shadow: inset 0 0 0 2px #5aa4ff;
+}
+
+.details-content {
+  max-width: 1100px;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  min-height: 59px;
+  align-items: center;
+}
+
+.detail-label {
+  font-size: 15px;
+}
+
+.detail-value {
+  font-size: 15px;
+}
+
+.security-value {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.security-value > span:first-child {
+  color: #555;
+}
+
+.security-value button {
+  border: 0;
+  background: transparent;
+  color: #0067df;
+  cursor: pointer;
+  padding: 0;
+}
+
+.invite-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.invite-link a {
+  color: #0875e5;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.copy-small {
+  color: #707b85;
+}
+
+.calendar-links {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.calendar-links a {
+  text-decoration: none;
+  color: #0875e5;
+}
+
+.calendar-links a:last-child {
+  color: #a62bd0;
+}
+
+.details-content hr {
+  border: 0;
+  border-top: 1px solid #e8eaed;
+  margin: 20px 0 25px 180px;
+}
+
+.encryption {
+  color: #20252b;
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.notes small {
+  color: #737d87;
+}
+
+.video-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.video-detail div {
+  display: grid;
+  grid-template-columns: 140px 80px;
+}
+
+.details-actions {
+  margin-top: 25px;
+  margin-left: 6px;
+  display: flex;
+  gap: 10px;
+}
+
+.start-button,
+.outline-button {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.start-button {
+  border: 0;
+  background: #0875e5;
+  color: white;
+  font-weight: 600;
+}
+
+.outline-button {
+  border: 1px solid #d9dfe5;
+  background: #ffffff;
+  color: #111820;
+}
+
+/* =========================================
+   SCHEDULE SIDEBAR FIX
+========================================= */
+
+.schedule-layout {
+  display: flex;
+  min-height: calc(100vh - 72px);
+}
+
+.schedule-main {
+  flex: 1;
+}
+
+/* Schedule form layout */
+.schedule-container {
+  max-width: 1040px;
+  padding: 30px 56px 80px 32px;
+  color: #151515;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 22px;
+  color: #0065e8;
+  font-size: 14px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 145px minmax(0, 1fr);
+  gap: 25px;
+  align-items: start;
+  max-width: 980px;
+  margin-bottom: 25px;
+}
+
+.form-label {
+  padding-top: 9px;
+  font-size: 14px;
+}
+
+.form-label.required::before {
+  content: "*";
+  margin-right: 4px;
+  color: #e53935;
+}
+
+.form-control-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.form-control-area > .schedule-input,
+.full-select {
+  max-width: 490px;
+}
+
+.description-button,
+.light-action-button,
+.show-options {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #0065e8;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.when-controls,
+.duration-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.date-input {
+  width: 241px;
+  height: 33px;
+  display: block;
+  padding: 0 11px;
+  border: 1px solid #cfd5dc;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.when-controls > span {
+  display: none;
+}
+
+.time-select { width: 198px; }
+.ampm-select { width: 105px; }
+.duration-hour, .duration-minute { width: 150px; }
+
+.duration-warning {
+  width: 810px;
+  min-height: 76px;
+  display: flex;
+  gap: 12px;
+  margin: 12px 0 0;
+  padding: 16px;
+  border: 1px solid #f1c89c;
+  border-radius: 13px;
+  background: #fffdf9;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.duration-warning a { color: #0065e8; }
+
+.checkbox-label,
+.radio-label,
+.passcode-row,
+.waiting-room {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.radio-group,
+.security-section,
+.nested-radio,
+.video-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.security-description {
+  margin: -4px 0 4px 25px;
+  color: #5d6670;
+  font-size: 13px;
+}
+
+.passcode-input { width: 150px; }
+
+.schedule-divider {
+  max-width: 980px;
+  margin: 32px 0;
+  border: 0;
+  border-top: 1px solid #e4e7eb;
+}
+
+.video-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.schedule-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.save-button,
+.cancel-button {
+  height: 38px;
+  padding: 0 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.save-button { background: #0875e5; color: #fff; font-weight: 600; }
+.cancel-button { border: 1px solid #d9dfe5; background: #fff; color: #111820; }
+
+@media (max-width: 800px) {
+  .schedule-container { padding: 24px 20px 60px; }
+  .form-row { grid-template-columns: 1fr; gap: 6px; }
+  .form-label { padding-top: 0; }
+  .duration-warning { width: 100%; }
+  .when-controls { flex-wrap: wrap; }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+  .sidebar {
+    width: 240px;
+    min-width: 240px;
+  }
+
+  .meeting-row {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .meeting-tabs {
+    gap: 18px;
+  }
+
+  .tab {
+    font-size: 15px;
+  }
+}
+
+/* =========================================================
+   HEADER NAV LINKS
+========================================================= */
+.header-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: 36px;
+}
+
+.header-nav-link {
+  color: #555c66;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.header-nav-link:hover {
+  color: #0b5cff;
+}
+
+/* =========================================================
+   MEETING DETAILS PAGE LAYOUT
+========================================================= */
+.meeting-details-layout {
+  display: flex;
+  min-height: calc(100vh - 72px);
+  background-color: #ffffff;
+}
+
+.meeting-details-main {
+  flex: 1;
+  min-width: 0;
+  padding: 32px 48px 90px;
+  background-color: #ffffff;
+}
+
+/* Breadcrumb */
+.details-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.details-breadcrumb a {
+  color: #0065e8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.details-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  color: #6e7682;
+  font-size: 16px;
+}
+
+.breadcrumb-current {
+  color: #111820;
+  font-weight: 500;
+}
+
+/* Tabs */
+.details-tabs-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 52px;
+}
+
+.details-tab-btn {
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  background: transparent;
+  color: #111820;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.details-tab-btn:hover {
+  background-color: #f4f6f8;
+}
+
+.details-tab-btn.active {
+  color: #0065e8;
+  border: 1.5px solid #0065e8;
+  background-color: #f0f7ff;
+}
+
+/* Details Table */
+.details-content-wrapper {
+  max-width: 1100px;
+}
+
+.details-table {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  margin-left: 0;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 165px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0;
+  font-size: 16px;
+}
+
+.detail-label {
+  color: #111820;
+  font-weight: 500;
+}
+
+.detail-value {
+  color: #111820;
+}
+
+.detail-value.font-medium {
+  font-weight: 500;
+}
+
+.security-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.check-icon {
+  color: #12803b;
+  font-weight: bold;
+}
+
+.security-label {
+  color: #111820;
+}
+
+.passcode-display {
+  color: #444b54;
+  letter-spacing: 2px;
+  font-family: monospace;
+}
+
+.link-btn {
+  background: transparent;
+  border: 0;
+  color: #0065e8;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  margin-left: 6px;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* Invite Link */
+.invite-link-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.invite-url {
+  color: #0065e8;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.invite-url:hover {
+  text-decoration: underline;
+}
+
+.icon-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: 0;
+  color: #5d6670;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.icon-copy-btn:hover {
+  color: #0065e8;
+  background-color: #f0f3f6;
+}
+
+/* Calendar Links */
+.calendar-links-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.calendar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.calendar-btn:hover {
+  text-decoration: underline;
+}
+
+.google-cal {
+  color: #0065e8;
+}
+
+.google-box {
+  color: #0065e8;
+  font-size: 12px;
+}
+
+.outlook-cal {
+  color: #0065e8;
+}
+
+.outlook-box {
+  color: #0065e8;
+  font-size: 12px;
+}
+
+.yahoo-cal {
+  color: #720e9e;
+}
+
+.yahoo-dot {
+  color: #720e9e;
+  font-size: 12px;
+}
+
+/* Detail Divider */
+.detail-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #e5e9ed;
+  margin: 10px 0;
+}
+
+/* Encryption */
+.encryption-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333a42;
+}
+
+.shield-icon {
+  font-size: 16px;
+}
+
+/* Notes */
+.notes-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.notes-heading {
+  color: #111820;
+}
+
+.notes-sub {
+  color: #6e7682;
+  font-size: 13px;
+}
+
+/* Video */
+.video-settings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.video-item {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  color: #111820;
+}
+
+.video-role {
+  font-weight: 500;
+}
+
+.video-status {
+  color: #111820;
+}
+
+/* Action Buttons */
+.detail-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.btn-start-meeting {
+  height: 38px;
+  padding: 0 24px;
+  border-radius: 8px;
+  background-color: #0065e8;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-start-meeting:hover {
+  background-color: #0052ba;
+}
+
+.btn-outline-action {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #111820;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #cfd5dc;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-outline-action:hover {
+  background-color: #f7f9fa;
+  border-color: #b8c1cb;
+}
+
+.btn-delete-action:hover {
+  color: #d32f2f;
+  border-color: #ffcdd2;
+  background-color: #ffebee;
+}
+
+/* =========================================================
+   ATTACHMENTS TAB (Matches Image 1)
+========================================================= */
+.attachments-content-wrapper {
+  max-width: 900px;
+}
+
+.attachment-header-banner {
+  margin-bottom: 20px;
+}
+
+.meeting-date-range {
+  color: #333a42;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.meeting-title-large {
+  color: #111820;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.attachments-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+/* The attachments view is intentionally an empty state in the reference UI. */
+.attachments-content-wrapper .attachments-section {
+  display: none;
+}
+/* ...until the meeting has saved whiteboards or docs. */
+.attachments-content-wrapper .attachments-section.has-attachments {
+  display: flex;
+}
+
+.attachments-content-wrapper .attachment-header-banner {
+  margin-top: 4px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #dfe3e8;
+}
+
+.attachments-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.attachments-section-title {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111820;
+}
+
+.attachments-section-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #6e7682;
+}
+
+.btn-upload-attachment {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #0065e8;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-upload-attachment:hover {
+  background-color: #0052ba;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+/* Drag & Drop Zone */
+.attachment-dropzone {
+  border: 2px dashed #cfd5dc;
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  background-color: #fafbfc;
+  transition: border-color 0.15s ease;
+}
+
+.attachment-dropzone:hover {
+  border-color: #0065e8;
+  background-color: #f0f7ff;
+}
+
+.dropzone-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.dropzone-text {
+  font-size: 15px;
+  color: #111820;
+  margin-bottom: 4px;
+}
+
+.dropzone-hint {
+  font-size: 13px;
+  color: #6e7682;
+}
+
+/* Attachments List */
+.attachments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attachment-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border: 1px solid #e4e7eb;
+  border-radius: 10px;
+  background-color: #ffffff;
+  transition: box-shadow 0.15s ease;
+}
+
+.attachment-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.attachment-file-icon {
+  margin-right: 14px;
+}
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.badge-pdf { background-color: #fee2e2; color: #dc2626; }
+.badge-doc { background-color: #dbeafe; color: #2563eb; }
+.badge-sheet { background-color: #d1fae5; color: #059669; }
+.badge-img { background-color: #fef3c7; color: #d97706; }
+.badge-other { background-color: #f3f4f6; color: #4b5563; }
+
+.attachment-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.attachment-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111820;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.attachment-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6e7682;
+}
+
+.uploader-tag {
+  color: #0065e8;
+}
+
+.attachment-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 16px;
+}
+
+.attachment-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #d0d7de;
+  background-color: #ffffff;
+  font-size: 13px;
+  color: #24292f;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.attachment-btn:hover {
+  background-color: #f6f8fa;
+}
+
+.attachment-btn.delete-btn {
+  padding: 6px 8px;
+  color: #cf222e;
+}
+
+.attachment-btn.delete-btn:hover {
+  background-color: #ffebe9;
+  border-color: #ff8182;
+}
+
+.empty-attachments {
+  text-align: center;
+  padding: 32px;
+  color: #6e7682;
+  font-size: 14px;
+}
+
+/* =========================================================
+   TOAST NOTIFICATION
+========================================================= */
+.zoom-toast {
+  position: fixed;
+  top: 84px;
+  right: 24px;
+  background-color: #111820;
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  z-index: 10000;
+  animation: slideInRight 0.25s ease-out;
+}
+
+.toast-icon {
+  color: #4ade80;
+  font-weight: bold;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   MODAL WINDOWS
+========================================================= */
+.zoom-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.zoom-modal-dialog {
+  background: #ffffff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 580px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.zoom-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e4e7eb;
+}
+
+.zoom-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111820;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: 0;
+  font-size: 16px;
+  color: #6e7682;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.modal-close-btn:hover {
+  background-color: #f0f3f6;
+  color: #111820;
+}
+
+.zoom-modal-body {
+  padding: 20px 24px;
+}
+
+.delete-dialog {
+  max-width: 670px;
+}
+
+.delete-dialog .zoom-modal-header {
+  padding: 28px 30px 10px;
+  border-bottom: 0;
+}
+
+.delete-dialog .zoom-modal-header h3 {
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.delete-dialog .zoom-modal-body {
+  padding: 0 30px 18px;
+}
+
+.delete-dialog .zoom-modal-body p {
+  margin: 0;
+  font-size: 18px;
+}
+
+.recently-deleted-link {
+  color: #126be8;
+}
+
+.delete-dialog .zoom-modal-footer {
+  padding: 10px 30px 24px;
+  border-top: 0;
+  background: #ffffff;
+}
+
+.delete-dialog .btn-danger {
+  padding: 8px 20px;
+  background: #ed173d;
+}
+
+.delete-dialog .btn-cancel:focus-visible {
+  outline: 2px solid #3185f6;
+  outline-offset: 2px;
+}
+
+.modal-description {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #444b54;
+}
+
+.invitation-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cfd5dc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  color: #111820;
+  resize: vertical;
+  background-color: #fafbfc;
+}
+
+.zoom-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #e4e7eb;
+  background-color: #fafbfc;
+}
+
+.btn-cancel {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #cfd5dc;
+  background-color: #ffffff;
+  color: #111820;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background-color: #f0f3f6;
+}
+
+.btn-primary {
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: 0;
+  background-color: #0065e8;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0052ba;
+}
+
+.btn-danger {
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: 0;
+  background-color: #d32f2f;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background-color: #b71c1c;
+}
+
+/* Edit Form */
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #111820;
+}
+
+.modal-input {
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #cfd5dc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.checkbox-row {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.checkbox-row label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* =========================================================
+   LIVE MEETING ROOM SIMULATION
+========================================================= */
+.live-meeting-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #1a1a1a;
+  z-index: 20000;
+  display: flex;
+  flex-direction: column;
+}
+
+.meeting-chat-sidebar {
+  width: 320px;
+  background-color: #242424;
+  border-left: 1px solid #383838;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #383838;
+  color: #ffffff;
+}
+
+.chat-header h4 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.chat-header button {
+  background: transparent;
+  border: 0;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.chat-messages-area {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-msg {
+  background-color: #2e2e2e;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.msg-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.msg-sender {
+  font-weight: 600;
+  color: #60a5fa;
+}
+
+.msg-body {
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.chat-form {
+  display: flex;
+  padding: 12px;
+  border-top: 1px solid #383838;
+  gap: 8px;
+}
+
+.chat-form input {
+  flex: 1;
+  padding: 8px 12px;
+  background-color: #1a1a1a;
+  border: 1px solid #404040;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 13px;
+}
+
+.chat-form button {
+  padding: 8px 14px;
+  background-color: #0b5cff;
+  color: #ffffff;
+  border: 0;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .meeting-details-main {
+    padding: 20px 16px 60px;
+  }
+  .detail-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .calendar-links-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .header-nav-links {
+    display: none;
+  }
+}
+
+/* The meeting details reference uses the collapsed navigation rail. */
+.meeting-details-layout > .sidebar.sidebar-collapsed {
+  width: 48px;
+  min-width: 48px;
+  flex: 0 0 48px;
+}
+
+/* Host action: busy state and error message */
+.quick-action[aria-busy="true"],
+.header-dropdown-button[aria-busy="true"] { opacity: 0.6; cursor: progress; }
+.host-error { margin: 10px 0 0; color: #d93025; font-size: 13px; text-align: center; }
+.header-dropdown .host-error {
+  position: absolute; top: calc(100% + 6px); right: 0; margin: 0; padding: 6px 10px;
+  white-space: nowrap; background: #fff; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================================================
+   LIVE ROOM: INVITE (Participants caret, menu, dialog)
+========================================================= */
+.invite-menu button:focus-visible, .invite-dialog button:focus-visible {
+  outline: 2px solid #4b96f1; outline-offset: 2px;
+}
+
+.invite-menu {
+  position: fixed; z-index: 20005; min-width: 180px; padding: 4px 0;
+  background: #1f1f1f; border: 1px solid #3a3a3a; border-radius: 6px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+.invite-menu button {
+  display: block; width: 100%; padding: 6px 32px; border: 1px solid transparent; background: transparent;
+  color: #e5e7eb; font-size: 13px; text-align: left; cursor: pointer;
+}
+.invite-menu button:hover, .invite-menu button:focus { background: #3a3a3a; border-color: #8a8a8a; outline: none; }
+
+.invite-dialog-backdrop {
+  position: fixed; inset: 0; z-index: 20010; display: flex; align-items: center; justify-content: center;
+  padding: 16px; background: rgba(0, 0, 0, 0.55);
+}
+.invite-dialog {
+  display: flex; flex-direction: column; width: min(795px, 100%); height: min(620px, calc(100vh - 32px));
+  background: #1e1f21; border: 1px solid #3a3b3d; border-radius: 10px; color: #fff; overflow: hidden;
+}
+.invite-dialog h2 { margin: 30px 24px 22px; font-size: 26px; font-weight: 700; text-align: center; }
+.invite-tabs {
+  display: flex; align-self: center; padding: 3px; background: #3a3b3d; border-radius: 8px;
+}
+.invite-tabs button {
+  min-width: 128px; padding: 6px 16px; border: 0; border-radius: 6px; background: transparent;
+  color: #b5b7ba; font-size: 14px; cursor: pointer;
+}
+.invite-tabs button.active { background: #26272a; color: #fff; }
+.invite-dialog-body { flex: 1; overflow-y: auto; padding: 14px 24px; }
+.invite-search {
+  display: flex; align-items: center; gap: 12px; height: 46px; padding: 0 14px;
+  border: 1px solid #5a5c60; border-radius: 8px; color: #9ca3af; font-size: 22px;
+}
+.invite-search:focus-within { border-color: #4b96f1; }
+.invite-search input {
+  flex: 1; min-width: 0; border: 0; background: transparent; color: #fff; font-size: 17px; outline: none;
+}
+.invite-search input::placeholder { color: #7d8087; }
+.invite-email-options { display: flex; flex-direction: column; align-items: center; gap: 12px; padding-top: 24px; }
+.invite-email-options p { margin: 0 0 8px; color: #b5b7ba; }
+.invite-email-options button {
+  width: 220px; padding: 10px; border: 1px solid #5a5c60; border-radius: 8px; background: #26272a;
+  color: #fff; font-size: 14px; cursor: pointer;
+}
+.invite-email-options button:hover { background: #3a3b3d; }
+.invite-dialog-footer {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding: 12px 24px;
+  border-top: 1px solid #3a3b3d;
+}
+.invite-link-btn { padding: 4px 0; border: 0; background: transparent; color: #4b96f1; font-size: 15px; cursor: pointer; }
+.invite-link-btn:hover { text-decoration: underline; }
+.invite-footer-spacer { flex: 1; }
+.invite-passcode { color: #b5b7ba; font-size: 14px; }
+.invite-passcode strong { margin-left: 10px; color: #fff; }
+.invite-primary, .invite-cancel { min-width: 74px; height: 36px; padding: 0 16px; border-radius: 8px; font-size: 15px; cursor: pointer; }
+.invite-primary { border: 0; background: #0e72ed; color: #fff; }
+.invite-primary:disabled { background: #1c4f8f; color: #b9c7db; cursor: not-allowed; }
+.invite-cancel { border: 1px solid #8a8c90; background: transparent; color: #fff; }
+.invite-cancel:hover { background: #2a2b2e; }
+
+.room-notice {
+  position: fixed; top: 64px; left: 50%; z-index: 20020; transform: translateX(-50%);
+  padding: 10px 18px; background: #111; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .invite-dialog h2 { font-size: 19px; margin: 20px 16px 16px; }
+  .invite-tabs button { min-width: 0; padding: 6px 12px; }
+  .invite-dialog-footer { gap: 10px; padding: 12px 16px; }
+}
+
+/* =========================================================
+   LIVE ROOM: ZOOM WORKPLACE LAYOUT
+   White workplace header + rail, dark meeting area, and a
+   controls dock that overlays the canvas and auto-hides.
+========================================================= */
+.live-meeting-overlay { height: 100dvh; background: #fff; overflow: hidden; }
+
+.zw-header {
+  display: flex; align-items: center; gap: 16px; flex: 0 0 56px; height: 56px; min-width: 0;
+  padding: 0 16px; background: #fff; border-bottom: 1px solid #e6e9ee; color: #232333;
+}
+.zw-brand { display: flex; align-items: center; flex-shrink: 0; }
+.zw-logo { color: #0b5cff; font-size: 26px; font-weight: 800; letter-spacing: -1.5px; line-height: 1; }
+.zw-product {
+  margin-left: 10px; padding-left: 10px; border-left: 1px solid #c4c9d0;
+  font-size: 17px; line-height: 20px; color: #232333;
+}
+.zw-history { display: flex; align-items: center; gap: 10px; color: #6e7680; flex-shrink: 0; }
+.zw-search {
+  display: flex; align-items: center; gap: 8px; flex: 0 1 300px; min-width: 0; height: 32px; margin: 0 auto;
+  padding: 0 10px; border-radius: 8px; background: #f1f3f5; color: #6e7680; font-size: 14px;
+}
+.zw-search-text { flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; }
+.zw-search kbd { font: inherit; font-size: 12px; color: #8a929c; }
+.zw-actions { display: flex; align-items: center; gap: 18px; flex-shrink: 0; font-size: 14px; }
+.zw-link { color: #232333; white-space: nowrap; }
+.zw-upgrade {
+  padding: 6px 14px; border-radius: 8px; background: #0b5cff; color: #fff; font-weight: 600; white-space: nowrap;
+}
+.zw-bell { display: flex; color: #4a525c; }
+.zw-avatar {
+  display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px;
+  background: #4e6b78; color: #fff; font-size: 15px; font-weight: 600;
+}
+
+.zw-body { display: flex; flex: 1; min-height: 0; }
+.zw-rail {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 0 0 72px;
+  padding: 10px 0 12px; background: #f7f8fa; border-right: 1px solid #e6e9ee; color: #4a525c;
+}
+.zw-rail-item {
+  display: flex; flex-direction: column; align-items: center; gap: 3px; width: 60px; padding: 8px 0;
+  border-radius: 10px; font-size: 11px;
+}
+.zw-rail-item.is-active { background: #e8effd; color: #0b5cff; }
+button.zw-rail-item { border: 0; background: transparent; color: inherit; font: inherit; font-size: 11px; cursor: pointer; }
+button.zw-rail-item:hover { background: #eef1f4; }
+button.zw-rail-item.is-active { background: #e8effd; color: #0b5cff; }
+button.zw-rail-item:focus-visible { outline: 2px solid #0b5cff; outline-offset: 1px; }
+.zw-rail-settings { margin-top: auto; }
+
+/* Meeting area */
+.zr-room { display: flex; flex-direction: column; flex: 1; min-width: 0; background: #1a1a1a; color: #fff; }
+.zr-header {
+  display: flex; align-items: center; gap: 12px; flex: 0 0 44px; min-width: 0; padding: 0 16px;
+  background: #121212; border-bottom: 1px solid #262626; font-size: 13px;
+}
+.zr-live {
+  display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; padding: 2px 8px; border-radius: 4px;
+  background: rgba(239, 68, 68, 0.15); color: #ff5c5c; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+}
+.zr-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.zr-title {
+  min-width: 0; margin: 0; overflow: hidden; font-size: 14px; font-weight: 600;
+  text-overflow: ellipsis; white-space: nowrap;
+}
+.zr-id { flex-shrink: 0; color: #a3a8b0; font-variant-numeric: tabular-nums; }
+
+.zr-stage { display: flex; flex: 1; min-height: 0; position: relative; }
+.zr-main { position: relative; flex: 1; min-width: 0; overflow: hidden; }
+
+/* The canvas always fills the whole stage; the dock sits on top of it. */
+.zr-canvas { position: absolute; inset: 0; padding: 12px; }
+/* Gallery: --cols x --rows tiles of 16:9, as large as fit (set by the page from the roster). */
+.zr-canvas-fit {
+  display: flex; flex-wrap: wrap; align-items: center; align-content: center; justify-content: center; gap: 8px;
+  width: 100%; height: 100%; container-type: size;
+}
+.zr-tile {
+  position: relative; display: grid; place-items: center; container-type: size;
+  width: min(
+    calc((100cqw - (var(--cols, 1) - 1) * 8px) / var(--cols, 1)),
+    calc((100cqh - (var(--rows, 1) - 1) * 8px) / var(--rows, 1) * 16 / 9)
+  );
+  aspect-ratio: 16 / 9; background: #262626; border: 2px solid transparent; border-radius: 10px;
+}
+.zr-tile.is-speaking { border-color: #2dd36f; }
+.zr-tile-avatar {
+  display: grid; place-items: center; width: clamp(36px, 20cqh, 132px); aspect-ratio: 1; border-radius: 16%;
+  background: #4e6b78; color: #fff; font-size: clamp(18px, 10cqh, 60px); font-weight: 600;
+}
+.zr-tile-name {
+  position: absolute; left: 8px; bottom: 8px; display: flex; align-items: center; gap: 6px; max-width: calc(100% - 16px);
+  padding: 3px 8px; border-radius: 4px; background: rgba(0, 0, 0, 0.6); font-size: 13px;
+}
+.zr-tile-name > span:first-of-type { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.zr-tile-muted { flex-shrink: 0; color: #ff5c5c; }
+.zr-host-badge {
+  flex-shrink: 0; padding: 0 5px; border-radius: 3px; background: #0b5cff; font-size: 10px; font-weight: 600; line-height: 16px;
+}
+
+/* Controls dock: transform + opacity only, so the canvas never moves. */
+.zr-toolbar {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;
+  height: 68px; padding: 0 12px; background: #1f1f1f; box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.06);
+  transform: translateY(100%); opacity: 0; pointer-events: none;
+  transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1), opacity 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+}
+.zr-toolbar.is-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) {
+  .zr-toolbar { transition: opacity 160ms linear; transform: none; }
+}
+
+.zr-group { display: flex; align-items: center; gap: 2px; }
+.zr-group-end { justify-content: flex-end; }
+.zr-split { display: flex; align-items: flex-start; }
+.zr-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  min-width: 64px; height: 56px; padding: 4px 6px; border: 0; border-radius: 8px;
+  background: transparent; color: #fff; font-size: 12px; cursor: pointer;
+}
+.zr-btn:hover { background: #2e2e2e; }
+.zr-btn.is-active { color: #4b96f1; }
+.zr-btn-icon { position: relative; display: flex; align-items: flex-start; gap: 2px; }
+.zr-btn-caret { margin-top: 1px; color: #a3a8b0; }
+.zr-btn-label { white-space: nowrap; }
+.zr-count {
+  position: absolute; top: -4px; left: 17px; padding: 0 3px; border-radius: 3px;
+  background: #1f1f1f; font-size: 10px; font-weight: 600; line-height: 12px;
+}
+.zr-caret {
+  display: grid; place-items: center; width: 18px; height: 22px; margin: 6px 0 0 -14px; border: 0; border-radius: 4px;
+  background: transparent; color: #a3a8b0; cursor: pointer;
+}
+.zr-caret:hover, .zr-caret.open { background: #3a3a3a; color: #fff; }
+.zr-share-icon {
+  display: grid; place-items: center; width: 28px; height: 24px; border-radius: 6px; background: #1db954; color: #fff;
+}
+/* End: an icon button like the others; it opens "End meeting for all" / "Leave meeting". */
+.zr-end-btn.is-active { background: #2e2e2e; }
+.zr-end-menu {
+  position: fixed; z-index: 20015; display: flex; flex-direction: column; gap: 10px; width: 260px; padding: 14px;
+  background: #242424; border: 1px solid #3a3a3a; border-radius: 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+.zr-end-menu button {
+  height: 40px; border: 0; border-radius: 8px; color: #fff; font-size: 15px; font-weight: 600; cursor: pointer;
+}
+.zr-end-menu .zr-end-all { background: #e02828; }
+.zr-end-menu .zr-end-all:hover { background: #c41f1f; }
+.zr-end-menu .zr-end-leave { background: #3b3d42; }
+.zr-end-menu .zr-end-leave:hover { background: #4a4c52; }
+.zr-end-menu button:disabled { opacity: 0.6; cursor: progress; }
+.zr-btn:focus-visible, .zr-caret:focus-visible, .zr-end-menu button:focus-visible { outline: 2px solid #4b96f1; outline-offset: 1px; }
+
+/* Chat drawer sits beside the canvas inside the dark stage. */
+.zr-stage .meeting-chat-sidebar { flex: 0 0 320px; width: 320px; }
+
+@media (max-width: 1100px) {
+  .zw-link { display: none; }
+  .zw-actions { gap: 14px; }
+}
+
+@media (max-width: 900px) {
+  .zr-toolbar { display: flex; justify-content: space-between; overflow-x: auto; scrollbar-width: none; }
+  .zr-group { flex-shrink: 0; }
+  .zr-btn { min-width: 56px; }
+  .zr-stage .meeting-chat-sidebar { position: absolute; top: 0; right: 0; bottom: 0; z-index: 3; width: min(320px, 90vw); }
+}
+
+@media (max-width: 760px) {
+  .zw-rail, .zw-history { display: none; }
+  .zw-header { gap: 10px; padding: 0 12px; }
+  .zw-search { flex: 1 1 auto; }
+  .zw-search kbd { display: none; }
+}
+
+@media (max-width: 640px) {
+  .zr-btn-label, .zr-btn-caret, .zw-upgrade, .zw-product { display: none; }
+  .zr-btn { min-width: 44px; height: 48px; }
+  .zr-toolbar { height: 60px; padding: 0 8px; }
+  .zr-id { font-size: 12px; }
+  .zw-search { flex: 0 0 auto; width: 36px; justify-content: center; padding: 0; margin: 0 0 0 auto; }
+  .zw-search-text { display: none; }
+}
+
+@media (max-width: 480px) {
+  .zr-optional { display: none; }
+  .zr-btn { min-width: 40px; }
+}
+
+/* =========================================================
+   SCHEDULED MEETINGS: real data on the Schedule, Manage and Meetings pages
+========================================================= */
+.meetings-header a { color: #005cff; font-size: 14px; text-decoration: none; }
+.meetings-header a:hover { text-decoration: underline; }
+.meeting-card-topic, .meeting-card-topic:visited { color: #0e71eb !important; text-decoration: none !important; }
+.meeting-card-topic:hover { color: #0e71eb !important; text-decoration: underline !important; }
+.upcoming-list { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.upcoming-list a {
+  display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; border-radius: 10px;
+  background: #f5f7f8; color: #131619; text-decoration: none;
+}
+.upcoming-list a:hover { background: #eef2f6; }
+.upcoming-list span { color: #5b6470; font-size: 12px; }
+.upcoming-list strong { overflow: hidden; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+
+.schedule-description { display: block; margin-top: 10px; min-height: 72px; resize: vertical; }
+.schedule-status, .meetings-empty, .details-status { margin: 24px 0; color: #5b6470; font-size: 14px; }
+.details-status a { color: #0b5cff; }
+.schedule-error { margin: 18px 0 0; color: #d93025; font-size: 14px; }
+.save-button:disabled { opacity: 0.6; cursor: not-allowed; }
+.schedule-attachments { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.schedule-attachments li {
+  display: inline-flex; align-items: center; gap: 6px; max-width: 100%; padding: 4px 6px 4px 10px;
+  border: 1px solid #d8dde3; border-radius: 8px; color: #232333; font-size: 13px;
+}
+.schedule-attachments span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.schedule-attachments button {
+  width: 20px; height: 20px; border: 0; border-radius: 4px; background: transparent; color: #5b6470; cursor: pointer;
+}
+.schedule-attachments button:hover { background: #eef2f6; color: #131619; }
+
+.security-list { display: flex; flex-direction: column; gap: 8px; }
+.detail-description { white-space: pre-line; }
+.detail-action-buttons button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* =========================================================
+   LIVE ROOM: PARTICIPANTS PANEL, WAITING ROOM AND ENTRY SCREENS
+========================================================= */
+.zp-panel {
+  position: relative; display: flex; flex-direction: column; flex: 0 0 340px; width: 340px; min-width: 0;
+  background: #1f2023; border-left: 1px solid #2e3034; color: #fff; font-size: 14px;
+}
+.zp-header { display: flex; align-items: center; justify-content: center; height: 52px; padding: 0 12px; position: relative; }
+.zp-header h2 { margin: 0; font-size: 16px; font-weight: 700; }
+.zp-header-actions { position: absolute; right: 10px; display: flex; gap: 6px; }
+.zp-header-actions button {
+  display: grid; place-items: center; width: 28px; height: 28px; border: 0; border-radius: 6px;
+  background: transparent; color: #e8e8e8; font-size: 18px; cursor: pointer;
+}
+.zp-header-actions button:hover { background: #2e3034; }
+.zp-body { flex: 1; min-height: 0; overflow-y: auto; padding: 4px 0; }
+.zp-section-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px 4px; }
+.zp-section-toggle {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 2px; border: 0; background: transparent;
+  color: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
+}
+.zp-caret-down { transform: rotate(180deg); }
+.zp-caret-right { transform: rotate(90deg); }
+.zp-list { margin: 0; padding: 0; list-style: none; }
+.zp-row { position: relative; display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 6px 12px; }
+.zp-row:hover, .zp-row:focus-within, .zp-row.is-active { background: #2b2d31; }
+.zp-avatar {
+  display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 10px;
+  background: #4e6b78; color: #fff; font-size: 20px; font-weight: 500;
+}
+.zp-row.is-waiting .zp-avatar { background: #3a4248; color: #9aa5ac; }
+.zp-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.zp-status { display: inline-flex; gap: 10px; color: #d8d8d8; }
+.zp-off { color: #e02828; }
+.zp-actions { display: none; gap: 6px; }
+.zp-row:hover .zp-actions, .zp-row:focus-within .zp-actions, .zp-row.is-active .zp-actions,
+.zp-row.is-waiting .zp-actions { display: inline-flex; }
+/* A row with actions swaps its mic/video icons for the buttons while hovered or focused. */
+.zp-row:has(.zp-actions):is(:hover, :focus-within, .is-active) .zp-status { display: none; }
+.zp-row.is-waiting .zp-actions { visibility: hidden; }
+.zp-row.is-waiting:hover .zp-actions, .zp-row.is-waiting:focus-within .zp-actions { visibility: visible; }
+.zp-blue {
+  display: inline-flex; align-items: center; gap: 4px; height: 32px; padding: 0 12px; border: 0; border-radius: 6px;
+  background: #0e72ed; color: #fff; font-size: 14px; white-space: nowrap; cursor: pointer;
+}
+.zp-blue:hover { background: #0b5fcc; }
+.zp-blue:disabled { opacity: 0.6; cursor: progress; }
+.zp-blue:focus-visible, .zp-footer button:focus-visible, .zp-section-toggle:focus-visible,
+.zp-menu button:focus-visible { outline: 2px solid #4b96f1; outline-offset: 2px; }
+.zp-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 16px 14px;
+  border-top: 1px solid #2e3034;
+}
+.zp-footer button {
+  height: 36px; padding: 0 22px; border: 0; border-radius: 18px; background: #2b2d31; color: #fff; font-size: 14px;
+  cursor: pointer;
+}
+.zp-footer button:hover { background: #3a3c41; }
+.zp-menu {
+  position: fixed; z-index: 20015; width: 230px; max-height: calc(100vh - 16px); overflow-y: auto;
+  padding: 6px 0; background: #2b2d31; border: 1px solid #3a3c41;
+  border-radius: 8px; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+}
+.zp-menu button {
+  display: block; width: 100%; padding: 7px 26px; border: 0; background: transparent; color: #f2f2f2;
+  font-size: 14px; text-align: left; cursor: pointer;
+}
+.zp-menu button:hover, .zp-menu button:focus { background: #3a3c41; outline: none; }
+.zp-menu-divider { height: 1px; margin: 6px 0; background: #45474c; }
+.zp-dialog-backdrop {
+  position: fixed; inset: 0; z-index: 20016; display: grid; place-items: center; padding: 16px; background: rgba(0, 0, 0, 0.5);
+}
+.zp-dialog {
+  display: flex; flex-direction: column; gap: 10px; width: min(340px, 100%); padding: 20px; border-radius: 10px;
+  background: #1f2023; border: 1px solid #3a3c41; color: #fff;
+}
+.zp-dialog h3 { margin: 0; font-size: 17px; }
+.zp-dialog label { color: #b5b7ba; font-size: 13px; }
+.zp-dialog input {
+  height: 36px; padding: 0 10px; border: 1px solid #5a5c60; border-radius: 6px; background: #26272a; color: #fff; font-size: 14px;
+}
+.zp-dialog input:focus { border-color: #4b96f1; outline: none; }
+.zp-dialog-buttons { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+.zp-dialog-buttons button:first-child {
+  height: 32px; padding: 0 14px; border: 1px solid #8a8c90; border-radius: 6px; background: transparent; color: #fff; cursor: pointer;
+}
+
+/* Entry, waiting room and removed screens take the stage's place. */
+.zr-lobby {
+  display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  padding: 24px 16px; text-align: center;
+}
+.zr-lobby h2 { margin: 0; max-width: 520px; font-size: 22px; font-weight: 600; }
+.zr-lobby p { margin: 0; color: #a3a8b0; }
+.zr-lobby-leave {
+  height: 34px; padding: 0 22px; border: 1px solid #5a5c60; border-radius: 8px; background: transparent; color: #fff; cursor: pointer;
+}
+.zr-entry { display: flex; flex-direction: column; gap: 8px; width: min(340px, 100%); text-align: left; }
+.zr-entry h2 { margin-bottom: 6px; text-align: center; }
+.zr-entry label { color: #b5b7ba; font-size: 13px; }
+.zr-entry input {
+  height: 40px; padding: 0 12px; border: 1px solid #5a5c60; border-radius: 8px; background: #26272a; color: #fff; font-size: 15px;
+}
+.zr-entry input:focus { border-color: #4b96f1; outline: none; }
+.zr-entry button {
+  height: 40px; margin-top: 8px; border: 0; border-radius: 8px; background: #0e72ed; color: #fff; font-size: 15px; cursor: pointer;
+}
+.zr-entry button:disabled { opacity: 0.6; cursor: progress; }
+.zr-entry-error { margin: 0; color: #ff6b6b; font-size: 13px; }
+
+@media (max-width: 900px) {
+  .zr-stage .zp-panel { position: absolute; top: 0; right: 0; bottom: 0; z-index: 3; width: min(340px, 92vw); }
+}
+
+/* The room is fixed to the viewport: right: 0 rather than 100vw, which would reach under a page scrollbar. */
+.live-meeting-overlay { right: 0; width: auto; }
+
+/* =========================================================
+   MINIMIZED MEETING: floating, draggable window on every page except the room.
+   Just the tile: avatar and name; the mic/camera buttons show on hover.
+   Double-click returns to the full meeting.
+========================================================= */
+.zm-mini {
+  position: fixed; z-index: 20030; display: flex; align-items: center; justify-content: center; overflow: hidden;
+  background: #1c1c1c; border: 1px solid #3a3a3a; border-radius: 12px; box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+  color: #fff; cursor: grab; touch-action: none; user-select: none;
+}
+.zm-mini:active { cursor: grabbing; }
+.zm-mini:focus-visible { outline: 2px solid #4b96f1; outline-offset: 2px; }
+.zm-avatar {
+  display: grid; place-items: center; width: 130px; height: 130px; border-radius: 4px;
+  background: #4e6b78; font-size: 64px; line-height: 1;
+}
+.zm-name {
+  position: absolute; left: 6px; bottom: 6px; display: inline-flex; align-items: center; gap: 2px;
+  max-width: calc(100% - 12px); padding: 2px 6px 2px 3px; border-radius: 4px; background: rgba(0, 0, 0, 0.75);
+  font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.zm-off { flex-shrink: 0; color: #ff2d55; }
+.zm-hover-controls {
+  position: absolute; left: 50%; bottom: 10px; display: none; gap: 8px; transform: translateX(-50%);
+}
+.zm-mini:hover .zm-hover-controls, .zm-mini:focus-within .zm-hover-controls { display: flex; }
+.zm-mini:hover .zm-name, .zm-mini:focus-within .zm-name { display: none; }
+.zm-hover-controls button {
+  display: grid; place-items: center; width: 54px; height: 50px; border: 0; border-radius: 12px;
+  background: #0f0f0f; cursor: pointer;
+}
+.zm-hover-controls button:hover { background: #262626; }
+.zm-hover-controls button:focus-visible { outline: 2px solid #4b96f1; outline-offset: 1px; }
+.zm-waiting { margin: 0; padding: 0 20px; color: #d0d0d0; font-size: 14px; text-align: center; }
+.zm-notice { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 12px; text-align: center; font-size: 14px; }
+.zm-notice p { margin: 0; }
+.zm-notice button {
+  height: 30px; padding: 0 18px; border: 1px solid #5a5c60; border-radius: 6px; background: transparent; color: #fff; cursor: pointer;
+}
+
+/* The header's profile logo is an avatar (the user's initial), not a text link. */
+.header-right .profile-button { border: 0; color: #ffffff; text-decoration: none; cursor: pointer; }
+.header-right .profile-button:focus-visible { outline: 2px solid #0b5cff; outline-offset: 2px; }
+
+/* Profile menu: who is signed in, and Sign out */
+.profile-menu-root { position: relative; }
+.profile-menu {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 1000; width: 300px; padding: 8px 0;
+  background: #ffffff; border: 1px solid #e6e9ee; border-radius: 12px; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+}
+.profile-menu-user { display: flex; align-items: center; gap: 12px; padding: 12px 16px 14px; }
+.profile-menu-avatar {
+  display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 10px;
+  background: #465d68; color: #ffffff; font-size: 20px;
+}
+.profile-menu-identity { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.profile-menu-name { color: #131619; font-size: 16px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.profile-menu-email { color: #6e7680; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.profile-menu-divider { height: 1px; margin: 0 16px 6px; background: #e6e9ee; }
+.profile-menu-item {
+  display: block; width: 100%; padding: 10px 16px; border: 0; background: transparent;
+  color: #131619; font-size: 16px; text-align: left; cursor: pointer;
+}
+.profile-menu-item:hover, .profile-menu-item:focus-visible { background: #f2f4f7; outline: none; }
+.profile-menu-item:disabled { opacity: 0.6; cursor: progress; }
+
+/* The Zoom wordmark is an SVG (components/ZoomLogo.tsx): no text styling around it. */
+.zoom-logo { display: inline-flex; align-items: center; letter-spacing: normal; text-decoration: none; }
+.zw-logo { display: inline-flex; align-items: center; letter-spacing: normal; }
+
+/* "Sorry, you cannot delete this meeting since it's in progress." */
+.zoom-error-toast {
+  position: fixed; top: 72px; left: 50%; z-index: 10001; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px); padding: 12px 18px;
+  background: #fff0f2; border-radius: 8px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14); color: #131619; font-size: 15px;
+}
+.zoom-error-toast-icon {
+  display: grid; place-items: center; flex: 0 0 20px; width: 20px; height: 20px; border-radius: 50%; background: #e8174a;
+}
+
+/* =========================================================
+   MANAGE MEETING (matches Zoom's page): full sidebar, compact rows,
+   pill tab, real calendar icons, and a bottom action bar.
+========================================================= */
+.sidebar-item-extras { display: inline-flex; align-items: center; gap: 10px; color: #555b64; }
+.sidebar-item .new-badge { margin-left: 0; }
+.sidebar-collapse { gap: 14px; }
+.sidebar-chevron { color: #555b64; font-size: 20px; line-height: 1; }
+
+.meeting-details-main { padding: 32px 36px 0; }
+.details-breadcrumb { margin-bottom: 22px; font-size: 16px; }
+.details-breadcrumb a { font-weight: 400; }
+.breadcrumb-current { font-weight: 400; }
+.details-tabs-container { gap: 20px; margin-bottom: 18px; }
+.details-tab-btn { padding: 8px 18px; border: 0; border-radius: 6px; color: #0b5cff; font-size: 16px; font-weight: 400; }
+.details-tab-btn.active { border: 0; background: #e8f0fe; color: #0b5cff; }
+.details-tab-btn:hover { background: #f0f5fe; }
+
+.details-table { gap: 0; padding-left: 18px; }
+.details-table .detail-row {
+  grid-template-columns: 180px minmax(0, 1fr); align-items: center; min-height: 58px; padding: 6px 0; font-size: 16px;
+}
+.details-table .detail-label, .details-table .detail-value { font-weight: 400; color: #232333; }
+.details-table .security-list { gap: 4px; }
+.details-table .check-icon { color: #232333; font-weight: 400; font-size: 14px; }
+.details-table .passcode-display { margin: 0 2px; color: #232333; font-family: inherit; letter-spacing: 0; }
+.details-table .link-btn { margin-left: 4px; font-size: 16px; color: #0b5cff; }
+.details-table .invite-url { color: #0b5cff; }
+.details-table .icon-copy-btn { color: #747487; }
+.details-table .calendar-links-row { gap: 34px; }
+.details-table .calendar-btn { gap: 8px; font-size: 18px; }
+.details-table .google-cal, .details-table .outlook-cal { color: #0b5cff; }
+.details-table .yahoo-cal { color: #6001d2; }
+.cal-svg { flex-shrink: 0; }
+.details-table .detail-divider { width: auto; margin: 18px 0 12px 180px; background: #e6e9ee; }
+.details-table .encryption-row { gap: 8px; color: #232333; }
+.shield-svg { flex-shrink: 0; }
+
+/* The actions stay at the bottom of the window while the details scroll. */
+.details-table .detail-action-buttons {
+  position: sticky; bottom: 0; z-index: 5; margin: 24px -36px 0 -54px; padding: 16px 36px 18px 42px;
+  background: #ffffff; border-top: 1px solid #e6e9ee;
+}
+.detail-action-buttons .btn-start-meeting { height: 36px; padding: 0 18px; font-size: 16px; font-weight: 400; }
+.detail-action-buttons .btn-outline-action { height: 36px; padding: 0 18px; font-size: 16px; font-weight: 400; color: #232333; }
+.detail-action-buttons .btn-save-template { margin-left: auto; }
+
+@media (max-width: 900px) {
+  .details-table { padding-left: 0; }
+  .details-table .detail-divider { margin-left: 0; }
+}
+@media (max-width: 650px) {
+  .details-table .detail-row { grid-template-columns: 1fr; gap: 4px; min-height: 0; padding: 10px 0; }
+  .details-table .detail-action-buttons { margin: 24px -18px 0; padding: 12px 18px; }
+  .detail-action-buttons .btn-save-template { margin-left: 0; }
+}
+
+/* The Delete Meeting dialog opens near the top of the page. */
+.zoom-modal-backdrop.delete-backdrop { align-items: flex-start; padding: 72px 16px 16px; }
+
+/* Copy Meeting Invitation (Manage Meeting page), as in Zoom */
+.copy-invite-dialog {
+  display: flex; flex-direction: column; width: min(760px, calc(100vw - 32px)); padding: 30px 32px 24px;
+  background: #ffffff; border-radius: 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+}
+.copy-invite-dialog h3 { margin: 0 0 22px; color: #232333; font-size: 26px; font-weight: 400; }
+.copy-invite-text {
+  width: 100%; min-height: 420px; padding: 12px 14px; border: 1px solid #b9bdc3; border-radius: 8px;
+  color: #232333; font-family: inherit; font-size: 16px; line-height: 1.55; resize: vertical;
+}
+.copy-invite-text:focus { border-color: #0b5cff; outline: none; }
+.copy-invite-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
+.copy-invite-buttons button { height: 38px; padding: 0 18px; border-radius: 8px; font-size: 16px; cursor: pointer; }
+.copy-invite-primary { border: 0; background: #0e72ed; color: #ffffff; font-weight: 600; }
+.copy-invite-primary:hover { background: #0b5fcc; }
+.copy-invite-cancel { border: 1px solid #dfe3e8; background: #ffffff; color: #232333; }
+.copy-invite-cancel:hover { background: #f5f7f9; }
+.copy-invite-buttons button:focus-visible { outline: 2px solid #0b5cff; outline-offset: 2px; }
+
+/* Delete Meeting dialog (Meetings list and Manage page), sized like Zoom's */
+.delete-meeting-dialog {
+  width: 558px; max-width: calc(100vw - 32px); padding: 25px 25px 21px;
+  background: #ffffff; border-radius: 11px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+}
+.delete-meeting-dialog h3 { margin: 0 0 20px; color: #131619; font-size: 21px; font-weight: 500; line-height: 1.25; }
+.delete-meeting-dialog p { margin: 0 0 25px; color: #131619; font-size: 13.5px; line-height: 1.5; }
+.delete-meeting-buttons { display: flex; justify-content: flex-end; gap: 9px; }
+.delete-meeting-buttons button { height: 32px; padding: 0 16px; border-radius: 7px; font-size: 13.5px; cursor: pointer; }
+.delete-meeting-confirm { border: 0; background: #e8174a; color: #ffffff; }
+.delete-meeting-confirm:hover { background: #c9113d; }
+.delete-meeting-cancel { border: 1px solid #dfe3e8; background: #ffffff; color: #131619; }
+.delete-meeting-cancel:hover { background: #f5f7f9; }
+.delete-meeting-buttons button:disabled { opacity: 0.6; cursor: progress; }
+.delete-meeting-buttons button:focus-visible { outline: 2px solid #0b5cff; outline-offset: 2px; }
+
+/* =========================================================
+   MEETING ROOM: Zoom's header, bright toolbar, Meeting Chat, Enter Meeting Info
+========================================================= */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* Header: (i) meeting title on the left; encryption shield and View on the right */
+.zr-header { position: relative; z-index: 4; flex-basis: 48px; justify-content: space-between; padding: 0 12px; background: #0b0b0b; border-bottom: 0; }
+.zr-info { position: relative; min-width: 0; }
+.zr-title { font-size: 15px; font-weight: 700; }
+.zr-info-btn {
+  display: flex; align-items: center; gap: 8px; max-width: 100%; height: 32px; padding: 0 10px; border: 0; border-radius: 8px;
+  background: #1c1c1c; color: #fff; font: inherit; font-weight: 700; cursor: pointer;
+}
+.zr-info-btn svg { flex-shrink: 0; }
+.zr-info-btn span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.zr-info-btn:hover, .zr-info-btn[aria-expanded="true"] { background: #2a2a2a; }
+.zr-info-pop {
+  position: absolute; top: calc(100% + 8px); left: 0; width: min(380px, calc(100vw - 32px)); padding: 18px 20px;
+  background: #242424; border: 1px solid #3a3a3a; border-radius: 12px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  font-size: 14px; font-weight: 400;
+}
+.zr-info-pop h2 { margin: 0 0 14px; font-size: 16px; font-weight: 700; }
+.zr-info-pop dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 18px; margin: 0; }
+.zr-info-pop dt { color: #a3a8b0; white-space: nowrap; }
+.zr-info-pop dd { min-width: 0; margin: 0; color: #fff; overflow-wrap: anywhere; }
+.zr-info-secure { display: flex; align-items: center; gap: 6px; }
+.zr-info-copy {
+  margin-top: 16px; height: 32px; padding: 0 16px; border: 0; border-radius: 8px; background: #0e72ed; color: #fff;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.zr-info-copy:hover { background: #0b5fcc; }
+.zr-header-end { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+.zr-secure { display: flex; }
+.zr-header-divider { width: 1px; height: 26px; background: #5a5a5a; }
+.zr-view-btn {
+  display: grid; place-items: center; width: 32px; height: 32px; border: 0; border-radius: 8px; background: transparent;
+  color: #fff; cursor: pointer;
+}
+.zr-view-btn:hover { background: #2a2a2a; }
+.zr-info-btn:focus-visible, .zr-view-btn:focus-visible, .zr-info-copy:focus-visible { outline: 2px solid #4b96f1; outline-offset: 1px; }
+
+/* Toolbar: large white icons and labels, as in Zoom */
+.zr-toolbar { height: 76px; background: #0b0b0b; box-shadow: none; }
+.zr-btn { min-width: 76px; height: 64px; gap: 4px; color: #fff; font-size: 14px; }
+.zr-btn:hover { background: #262626; }
+.zr-btn.is-active { color: #fff; background: #262626; }
+.zr-btn-icon > svg:first-child { width: 30px; height: 30px; stroke-width: 1.6; }
+.zr-btn-caret { width: 14px; height: 14px; margin-top: 0; color: #d4d4d4; }
+.zr-count { top: -3px; left: 33px; padding: 0; background: transparent; font-size: 13px; font-weight: 400; line-height: 14px; }
+.zr-caret { width: 20px; height: 24px; margin: 6px 0 0 -18px; color: #d4d4d4; }
+.zr-caret svg { width: 14px; height: 14px; }
+.zr-share-icon { width: 32px; height: 28px; margin: 1px 0; border-radius: 4px; background: #00d66b; color: #0b0b0b; }
+.zr-end-btn .zr-btn-icon > svg:first-child { width: 32px; height: 32px; }
+
+/* Meeting Chat */
+.zc-panel {
+  display: flex; flex: 0 0 360px; flex-direction: column; width: 360px; min-height: 0; margin: 4px 4px 4px 0;
+  background: #1f1f21; border: 1px solid #2c2c2e; border-radius: 12px; color: #fff; overflow: hidden;
+}
+.zc-header { position: relative; display: flex; align-items: center; justify-content: center; flex: 0 0 52px; padding: 0 84px; }
+.zc-header h2 { margin: 0; font-size: 17px; font-weight: 700; white-space: nowrap; }
+.zc-header-actions { position: absolute; right: 10px; display: flex; gap: 4px; }
+.zc-header-actions button, .zc-tools button {
+  display: grid; place-items: center; width: 32px; height: 32px; border: 0; border-radius: 6px; background: transparent;
+  color: #e8e8e8; cursor: pointer;
+}
+.zc-header-actions button:hover, .zc-tools button:hover { background: #2e2e30; color: #fff; }
+.zc-messages { display: flex; flex: 1; flex-direction: column; gap: 14px; min-height: 0; padding: 8px 16px 12px; overflow-y: auto; }
+.zc-sample-note { margin: 0; color: #8c8f94; font-size: 12px; line-height: 1.45; text-align: center; }
+.zc-msg-meta { display: flex; justify-content: space-between; gap: 8px; color: #a3a8b0; font-size: 12px; }
+.zc-msg-meta strong { color: #d4d4d4; font-weight: 600; }
+.zc-msg-text { margin: 4px 0 0; color: #fff; font-size: 14px; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.zc-who {
+  display: flex; align-items: center; justify-content: center; gap: 6px; flex: 0 0 34px; width: 100%; border: 0;
+  background: #2b2b2d; color: #b5b7ba; font-size: 14px; cursor: pointer;
+}
+.zc-who:hover { color: #fff; }
+.zc-who-info { margin: 0; padding: 8px 14px; background: #262628; color: #b5b7ba; font-size: 12.5px; line-height: 1.45; }
+.zc-compose { display: flex; flex-direction: column; flex: 0 0 auto; }
+.zc-to { display: flex; align-items: center; gap: 8px; padding: 8px 10px 0; color: #a3a8b0; font-size: 14px; }
+.zc-to-pill { padding: 4px 18px; border-radius: 999px; background: #0e72ed; color: #fff; font-size: 14px; }
+.zc-compose textarea {
+  height: 92px; padding: 10px 10px 4px; border: 0; background: transparent; color: #fff; font: inherit; font-size: 16px;
+  line-height: 1.4; resize: none;
+}
+.zc-compose textarea::placeholder { color: #e4e4e4; }
+.zc-compose textarea:focus { outline: none; }
+.zc-tools { display: flex; align-items: center; gap: 4px; padding: 6px 10px 10px; }
+.zc-tools button { color: #b5b7ba; }
+.zc-tools .zc-send { width: 34px; height: 34px; margin-left: auto; border-radius: 8px; background: #3a3a3c; color: #8c8f94; }
+.zc-tools .zc-send:not(:disabled) { background: #0e72ed; color: #fff; }
+.zc-tools .zc-send:not(:disabled):hover { background: #0b5fcc; }
+.zc-tools .zc-send:disabled { cursor: default; }
+.zc-panel button:focus-visible, .zc-compose textarea:focus-visible { outline: 2px solid #4b96f1; outline-offset: -2px; }
+
+@media (max-width: 900px) {
+  .zc-panel { position: absolute; top: 0; right: 0; bottom: 0; z-index: 3; width: min(360px, 92vw); margin: 0; }
+}
+@media (max-width: 640px) {
+  .zr-btn-icon > svg:first-child { width: 26px; height: 26px; }
+  .zr-toolbar { height: 64px; }
+  .zr-header-divider { display: none; }
+}
+
+/* Enter Meeting Info: preview on the left, passcode / name / Join on the right */
+.zr-lobby.is-entry { padding: 32px 24px; }
+.zj { display: flex; align-items: center; justify-content: center; gap: 48px; width: min(1040px, 100%); text-align: left; }
+.zj-preview {
+  position: relative; display: grid; place-items: center; flex: 1 1 560px; max-width: 600px; aspect-ratio: 16 / 9;
+  background: #242424; border-radius: 12px; overflow: hidden;
+}
+.zj-avatar {
+  display: grid; place-items: center; width: 26%; aspect-ratio: 1; border-radius: 12px; background: #7f56d9;
+  color: #fff; font-size: clamp(36px, 6vw, 72px); font-weight: 600;
+}
+.zj-controls {
+  position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 8px; padding: 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+}
+.zj-ctrl {
+  display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border: 0; border-radius: 8px;
+  background: rgba(36, 36, 36, 0.92); color: #fff; font-size: 14px; cursor: pointer;
+}
+.zj-ctrl:hover { background: #3a3a3a; }
+.zj-caret { width: 12px; height: 12px; color: #d4d4d4; }
+.zj-backgrounds { margin-left: auto; }
+.zj-form { display: flex; flex: 0 1 360px; flex-direction: column; gap: 8px; min-width: 0; }
+.zj-form h2 { margin: 0 0 14px; font-size: 24px; font-weight: 700; }
+.zj-form label { margin-top: 6px; color: #d4d4d4; font-size: 14px; }
+.zj-form input {
+  height: 44px; padding: 0 14px; border: 1px solid #5a5c60; border-radius: 8px; background: transparent; color: #fff;
+  font-size: 16px;
+}
+.zj-form input::placeholder { color: #8c8f94; }
+.zj-form input:focus { border-color: #4b96f1; outline: none; }
+.zj-form button {
+  height: 44px; margin-top: 18px; border: 0; border-radius: 8px; background: #0e72ed; color: #fff; font-size: 16px;
+  font-weight: 600; cursor: pointer;
+}
+.zj-form button:hover:not(:disabled) { background: #0b5fcc; }
+.zj-form button:disabled { background: #3a3a3c; color: #8c8f94; cursor: default; }
+.zj-error { margin: 4px 0 0; color: #ff6b6b; font-size: 13px; }
+.zj-ctrl:focus-visible, .zj-form button:focus-visible { outline: 2px solid #4b96f1; outline-offset: 2px; }
+@media (max-width: 900px) {
+  .zj { flex-direction: column; gap: 24px; }
+  .zj-preview { flex: 0 0 auto; width: 100%; }
+  .zj-form { flex: 0 0 auto; width: min(420px, 100%); }
+}
+@media (max-width: 480px) {
+  .zj-ctrl span { display: none; }
+}
+
+/* "Joining Meeting...": bright white ring with a blue arc, white text */
+.zr-joining {
+  display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 26px;
+  padding: 24px 16px; background: #1a1a1a; color: #ffffff;
+}
+.zr-joining.is-page { position: fixed; inset: 0; z-index: 20020; }
+.zr-joining p { margin: 0; font-size: 28px; font-weight: 500; letter-spacing: 0.01em; }
+.zr-joining-spinner {
+  width: 64px; height: 64px; border: 5px solid #ffffff; border-left-color: #2d8cff; border-top-color: #2d8cff;
+  border-radius: 50%; animation: zr-joining-spin 0.9s linear infinite;
+}
+@keyframes zr-joining-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .zr-joining-spinner { animation-duration: 2.4s; }
+}
+@media (max-width: 480px) {
+  .zr-joining p { font-size: 22px; }
+}
+
+/* Meeting room: Settings (bottom of the left rail) opens the profile menu beside the rail */
+.profile-menu-root.is-settings .profile-menu { top: auto; right: auto; bottom: 0; left: calc(100% + 10px); }
+
+/* =========================================================
+   REACTIONS (React menu) and the meeting time limit
+========================================================= */
+.zrx-menu {
+  position: fixed; z-index: 20015; display: flex; flex-direction: column; gap: 8px;
+  width: min(400px, calc(100vw - 16px)); padding: 10px 12px 12px; transform: translateX(-50%);
+  background: #111111; border: 1px solid #2e2e2e; border-radius: 14px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+.zrx-emojis, .zrx-more-grid { display: flex; align-items: center; justify-content: space-between; }
+.zrx-more-grid { flex-wrap: wrap; justify-content: flex-start; padding-bottom: 4px; border-bottom: 1px solid #2a2a2a; }
+.zrx-emoji {
+  display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 8px; background: transparent;
+  font-size: 28px; line-height: 1; cursor: pointer; transition: transform 120ms ease;
+}
+.zrx-emoji:hover { background: #2a2a2a; transform: scale(1.12); }
+.zrx-more { color: #e8e8e8; font-size: 16px; letter-spacing: 1px; }
+.zrx-feedback { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.zrx-feedback-btn {
+  position: relative; display: grid; place-items: center; height: 40px; border: 0; border-radius: 10px;
+  background: #242424; cursor: pointer;
+}
+.zrx-feedback-btn:hover, .zrx-feedback-btn.is-on { background: #3a3a3a; }
+.zrx-feedback-btn.is-on { box-shadow: inset 0 0 0 1.5px #4b96f1; }
+/* Tooltip above each feedback button (Yes, No, Slow down, Speed up, Coffee) */
+.zrx-feedback-btn::after {
+  content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; z-index: 1;
+  padding: 6px 10px; border-radius: 6px; background: #2b2b2b; color: #fff; font-size: 14px; font-weight: 600;
+  white-space: nowrap; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  opacity: 0; transform: translate(-50%, 4px); transition: opacity 120ms ease, transform 120ms ease; pointer-events: none;
+}
+.zrx-feedback-btn:hover::after, .zrx-feedback-btn:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+.zrx-coffee { line-height: 1; }
+.zrx-wide {
+  height: 42px; border: 0; border-radius: 10px; background: #242424; color: #fff; font-size: 16px; font-weight: 700;
+  cursor: pointer;
+}
+.zrx-wide:hover { background: #333333; }
+.zrx-menu button:focus-visible { outline: 2px solid #4b96f1; outline-offset: 1px; }
+
+/* Your tile: raised hand, status and the latest reaction, top-left */
+.zrx-tile-status {
+  position: absolute; top: 8px; left: 8px; z-index: 1; display: flex; align-items: center; gap: 10px;
+  pointer-events: none;
+}
+.zrx-tile-hand, .zrx-tile-emoji { font-size: clamp(30px, 14cqh, 76px); line-height: 1; }
+.zrx-tile-emoji { animation: zrx-pop 260ms cubic-bezier(0.2, 0.9, 0.3, 1.3); }
+.zrx-tile-feedback { display: flex; }
+.zrx-tile-feedback svg, .zrx-tile-feedback .zrx-coffee { width: clamp(30px, 12cqh, 64px); height: auto; }
+.zrx-tile-brb {
+  display: flex; align-items: center; gap: 10px; padding: 8px 18px 8px 10px; border-radius: 22px;
+  background: rgba(40, 40, 40, 0.92); color: #fff; font-size: clamp(12px, 3.6cqh, 15px);
+}
+.zrx-tile-brb span { font-size: clamp(28px, 13cqh, 64px); line-height: 1; }
+@keyframes zrx-pop { from { transform: scale(0.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* An emoji with a "You" label floating up the left side of the screen */
+.zrx-floater {
+  position: absolute; bottom: 96px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  pointer-events: none; animation: zrx-float 4.2s cubic-bezier(0.25, 0.6, 0.35, 1) forwards;
+}
+.zrx-floater-emoji { font-size: 44px; line-height: 1; }
+.zrx-floater-name {
+  padding: 5px 26px; border-radius: 999px; background: #a8c7fa; color: #0b1a33; font-size: 14px; font-weight: 700;
+}
+@keyframes zrx-float {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  10% { transform: translateY(-20px) scale(1); opacity: 1; }
+  75% { opacity: 1; }
+  100% { transform: translateY(-62vh); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .zrx-floater { animation-duration: 2.5s; animation-timing-function: linear; }
+  .zrx-tile-emoji { animation: none; }
+}
+
+/* Above the toolbar: your reaction and Lower hand / I'm back */
+.zrx-status-bar {
+  position: absolute; left: 50%; bottom: 88px; z-index: 2; display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px; transform: translateX(-50%); border-radius: 16px; background: rgba(48, 48, 48, 0.95);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+.zrx-status-emoji { padding: 0 4px; font-size: 22px; line-height: 1; }
+.zrx-status-bar button {
+  display: flex; align-items: center; gap: 8px; height: 36px; min-width: 220px; justify-content: center; padding: 0 18px;
+  border: 0; border-radius: 10px; background: #4a4a4a; color: #fff; font-size: 16px; cursor: pointer;
+}
+.zrx-status-bar button:hover { background: #5a5a5a; }
+.zrx-status-bar button:focus-visible { outline: 2px solid #4b96f1; outline-offset: 2px; }
+@media (max-width: 640px) {
+  .zrx-status-bar { bottom: 74px; }
+  .zrx-status-bar button { min-width: 0; }
+}
+
+/* Time limit: the host's countdown (header) and warning (top of the stage) */
+.zr-countdown {
+  padding: 4px 10px; border-radius: 6px; background: #2a2a2a; color: #ffb547; font-size: 13px; font-weight: 600;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.zr-limit-banner {
+  position: absolute; top: 12px; left: 50%; z-index: 3; display: flex; align-items: center; gap: 14px;
+  width: min(720px, calc(100% - 24px)); padding: 14px 16px 14px 20px; transform: translateX(-50%);
+  background: #000000; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+.zr-limit-icon { color: #f5a623; font-size: 22px; line-height: 1; }
+.zr-limit-banner p { flex: 1; margin: 0; color: #fff; font-size: 16px; line-height: 1.45; }
+.zr-limit-banner button {
+  display: grid; place-items: center; width: 30px; height: 30px; border: 0; border-radius: 6px; background: transparent;
+  color: #fff; cursor: pointer;
+}
+.zr-limit-banner button:hover { background: #2a2a2a; }
