@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import JoiningMeeting from "@/components/JoiningMeeting";
+import { requireSignIn } from "@/lib/identity";
 import { getPublicMeeting } from "@/lib/meetings";
 
 export default function InviteLinkPage() {
@@ -16,6 +17,7 @@ export default function InviteLinkPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    if (requireSignIn(router)) return;
     const meetingId = decodeURIComponent(id ?? "").replace(/[\s-]/g, "");
     if (!/^\d{10,11}$/.test(meetingId)) {
       setError("This invite link is not valid.");

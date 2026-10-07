@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { requireSignIn } from "@/lib/identity";
 import { getPublicMeeting } from "@/lib/meetings";
 
 export default function JoinPage() {
@@ -13,8 +14,9 @@ export default function JoinPage() {
   const [looking, setLooking] = useState(false);
 
   useEffect(() => {
+    if (requireSignIn(router)) return;
     setStarted(new URLSearchParams(window.location.search).get("started") === "1");
-  }, []);
+  }, [router]);
 
   // Find the real meeting (an 11-digit Meeting ID or a 10-digit Personal Meeting ID, typed or
   // taken from a pasted invite link .../j/<id>), then open its room.

@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { identifyUser, saveUserId } from "@/lib/identity";
+import { identifyUser, safeNextPath, saveUserId } from "@/lib/identity";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -20,7 +20,8 @@ export default function SignInPage() {
       const user = await identifyUser(value);
       saveUserId(user.id);
       window.localStorage.setItem("zoom-user-name", user.display_name);
-      router.push("/");
+      // Back to the meeting (or other page) that sent them here, otherwise Home.
+      router.push(safeNextPath(new URLSearchParams(window.location.search).get("next")));
     } catch (failure) {
       setError(failure instanceof Error ? failure.message : "Couldn't sign in. Please try again.");
       setSubmitting(false);

@@ -39,6 +39,21 @@ export function getUserId(): string | null {
   return value && /^[1-9]\d*$/.test(value) ? value : null;
 }
 
+/**
+ * Send a signed-out visitor to the sign-in page, coming back to this page afterwards.
+ * Returns true when it redirected (the caller should stop).
+ */
+export function requireSignIn(router: { replace: (url: string) => void }): boolean {
+  if (getUserId()) return false;
+  router.replace(`/signin?next=${encodeURIComponent(window.location.pathname + window.location.search)}`);
+  return true;
+}
+
+/** Where to go after signing in: a path on this site, or Home. Never another site. */
+export function safeNextPath(next: string | null): string {
+  return next && next.startsWith("/") && !next.startsWith("//") && !next.startsWith("/\\") ? next : "/";
+}
+
 export function saveUserId(id: number): void {
   window.localStorage.setItem(USER_ID_KEY, String(id));
 }

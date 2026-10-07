@@ -10,6 +10,7 @@ import ProfileMenu from "@/components/ProfileMenu";
 import ReactionsMenu, { FEEDBACK, Feedback, FeedbackIcon } from "@/components/Reactions";
 import ZoomLogo from "@/components/ZoomLogo";
 import { useRoomSession } from "@/lib/useRoomSession";
+import { requireSignIn } from "@/lib/identity";
 import { getActiveMeeting, setActiveMeeting, setRoomOpen, updateActiveMeeting } from "@/lib/activeMeeting";
 import {
   BackIcon, BackgroundsIcon, BellIcon, CaretUpIcon, ChatIcon, CloseIcon, DotsIcon, EmojiIcon, EndIcon,
@@ -117,6 +118,7 @@ export default function MeetingDetailsPage() {
   }
 
   useEffect(() => {
+    if (requireSignIn(router)) return;
     const params = new URLSearchParams(window.location.search);
     if (params.get("live") === "1") {
       setShowLiveMeeting(true);
