@@ -10,7 +10,7 @@ import ProfileMenu from "@/components/ProfileMenu";
 import ReactionsMenu, { FEEDBACK, Feedback, FeedbackIcon } from "@/components/Reactions";
 import ZoomLogo from "@/components/ZoomLogo";
 import { useRoomSession } from "@/lib/useRoomSession";
-import { getUserId, requireSignIn } from "@/lib/identity";
+import { getUserId, requireSignIn, signOut } from "@/lib/identity";
 import { getActiveMeeting, setActiveMeeting, setRoomOpen, updateActiveMeeting } from "@/lib/activeMeeting";
 import {
   BackIcon, BackgroundsIcon, BellIcon, CaretUpIcon, ChatIcon, CloseIcon, DotsIcon, EmojiIcon, EndIcon,
@@ -25,9 +25,11 @@ import {
   formatInZone,
   formatMeetingCode,
   formatMeetingId,
+  getCurrentUser,
   getMeetingDetails,
   getPublicMeeting,
   isMeetingCode,
+  leaveMeeting,
   removeAttachment,
   startMeeting,
   timeZonePlace,
@@ -152,12 +154,109 @@ export default function MeetingDetailsPage() {
   const [infoOpen, setInfoOpen] = useState(false);
   const infoRef = useRef<HTMLDivElement>(null);
 
-  // The signed-in user's display name (saved at sign-in); the room shows it on the host tile.
+  // The signed-in user's display name and email; loaded from session / localStorage / API.
   const [hostName, setHostName] = useState("You");
+  const [currentUser, setCurrentUser] = useState<{ name: string; email: string }>({ name: "", email: "" });
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+
+  // Search modal & History popover state
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchTab, setSearchTab] = useState("Top results");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const historyRef = useRef<HTMLDivElement>(null);
+
+  // Keyboard shortcuts: Ctrl+K / Cmd+K to open search, Escape to close
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K")) {
+        e.preventDefault();
+        setSearchModalOpen(true);
+      } else if (e.key === "Escape") {
+        setSearchModalOpen(false);
+        setHistoryOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Auto-focus input when search modal opens
+  useEffect(() => {
+    if (searchModalOpen) {
+      setTimeout(() => searchInputRef.current?.focus(), 50);
+    } else {
+      setSearchQuery("");
+    }
+  }, [searchModalOpen]);
+
+  // Click outside to close history dropdown
+  useEffect(() => {
+    if (!historyOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (historyRef.current && !historyRef.current.contains(e.target as Node)) {
+        setHistoryOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [historyOpen]);
+
   useEffect(() => {
     const saved = window.localStorage.getItem("zoom-user-name")?.trim();
-    if (saved) setHostName(saved);
+    if (saved) {
+      setHostName(saved);
+      setCurrentUser((prev) => ({ ...prev, name: saved }));
+    }
+    getCurrentUser()
+      .then((me) => {
+        if (me) {
+          const resolvedName = me.display_name || saved || "";
+          setHostName(resolvedName);
+          setCurrentUser({
+            name: resolvedName,
+            email: me.email || "",
+          });
+        }
+      })
+      .catch(() => undefined);
   }, []);
+
+  useEffect(() => {
+    if (!userMenuOpen) return;
+    const close = (event: Event) => {
+      if (event instanceof KeyboardEvent && event.key !== "Escape") return;
+      if (event instanceof PointerEvent && userMenuRef.current?.contains(event.target as Node)) return;
+      setUserMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", close);
+    document.addEventListener("keydown", close);
+    return () => {
+      document.removeEventListener("pointerdown", close);
+      document.removeEventListener("keydown", close);
+    };
+  }, [userMenuOpen]);
+
+  const handleUserSignOut = async () => {
+    setUserMenuOpen(false);
+    try {
+      const active = getActiveMeeting();
+      if (active) {
+        await leaveMeeting(active.code).catch(() => undefined);
+        setActiveMeeting(null);
+      } else if (details) {
+        await leaveMeeting(details.meeting_code).catch(() => undefined);
+      }
+    } catch {
+      // ignore
+    }
+    signOut();
+    router.push("/signin");
+  };
+
   const hostInitial = hostName.charAt(0).toUpperCase();
 
   // This browser in the live meeting (joined as host, waiting, ...) and the Participants panel.
@@ -1173,24 +1272,384 @@ export default function MeetingDetailsPage() {
                 <span className="zw-logo"><ZoomLogo height={20} /></span>
                 <span className="zw-product">Workplace</span>
               </div>
-              <div className="zw-history" aria-hidden="true">
-                <BackIcon size={18} />
-                <ForwardIcon size={18} />
-                <HistoryIcon size={18} />
+              <div className="zw-history">
+                <button
+                  type="button"
+                  className="zw-hist-btn"
+                  aria-label="Back"
+                  title="Back"
+                  onClick={() => showRoomNotice("Navigation history is for demo only.")}
+                >
+                  <BackIcon size={18} />
+                </button>
+                <button
+                  type="button"
+                  className="zw-hist-btn"
+                  aria-label="Forward"
+                  title="Forward"
+                  onClick={() => showRoomNotice("Navigation history is for demo only.")}
+                >
+                  <ForwardIcon size={18} />
+                </button>
+                <div className="zw-hist-container" ref={historyRef}>
+                  <button
+                    type="button"
+                    className={`zw-hist-btn zw-history-icon-btn ${historyOpen ? "is-active" : ""}`}
+                    aria-label="History"
+                    aria-expanded={historyOpen}
+                    onClick={() => setHistoryOpen((prev) => !prev)}
+                  >
+                    <HistoryIcon size={18} />
+                    <span className="zw-hist-tooltip">History</span>
+                  </button>
+
+                  {historyOpen && (
+                    <div className="zw-history-dropdown" role="region" aria-label="Session history">
+                      <div className="zw-hd-title">No session history yet</div>
+                      <div className="zw-hd-demo">History is for demonstration only</div>
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="zw-search" aria-hidden="true">
+
+              <button
+                type="button"
+                className="zw-search"
+                onClick={() => setSearchModalOpen(true)}
+                aria-label="Search Workplace"
+              >
                 <SearchIcon size={16} />
                 <span className="zw-search-text">Search</span>
                 <kbd>Ctrl+K</kbd>
-              </div>
+              </button>
               <div className="zw-actions">
-                <span className="zw-link">Admin Center</span>
-                <span className="zw-link">Download</span>
-                <span className="zw-upgrade">Upgrade</span>
-                <span className="zw-bell" aria-hidden="true"><BellIcon size={20} /></span>
-                <span className="zw-avatar" title={hostName}>{hostInitial}</span>
+                <button
+                  type="button"
+                  className="zw-pill-btn zw-pill-admin"
+                  onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                >
+                  Admin Center
+                </button>
+                <button
+                  type="button"
+                  className="zw-pill-btn zw-pill-download"
+                  onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                >
+                  Download
+                </button>
+                <button
+                  type="button"
+                  className="zw-pill-btn zw-pill-upgrade"
+                  onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                >
+                  Upgrade
+                </button>
+                <button
+                  type="button"
+                  className="zw-icon-btn zw-bell-btn"
+                  aria-label="Notifications"
+                  onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                >
+                  <BellIcon size={20} />
+                </button>
+
+                <div className="zw-profile-menu-container" ref={userMenuRef}>
+                  <button
+                    type="button"
+                    className={`zw-avatar-btn ${userMenuOpen ? "is-active" : ""}`}
+                    aria-label="Profile"
+                    title="Profile"
+                    aria-expanded={userMenuOpen}
+                    onClick={() => setUserMenuOpen((open) => !open)}
+                  >
+                    <span className="zw-avatar-text">{currentUser.name.charAt(0).toUpperCase() || hostInitial}</span>
+                    <span className="zw-avatar-cam-badge" aria-hidden="true">
+                      <svg width="8" height="7" viewBox="0 0 16 12" fill="white">
+                        <path d="M0 2C0 0.895431 0.895431 0 2 0H8C9.10457 0 10 0.895431 10 2V10C10 11.1046 9.10457 12 8 12H2C0.895431 12 0 11.1046 0 10V2Z" />
+                        <path d="M11 3.5L16 1V11L11 8.5V3.5Z" />
+                      </svg>
+                    </span>
+                  </button>
+
+                  {userMenuOpen && (
+                    <div className="zw-profile-dropdown" role="menu" aria-label="User profile">
+                      <div className="zw-pd-user-header">
+                        <div className="zw-pd-avatar">
+                          {currentUser.name.charAt(0).toUpperCase() || hostInitial}
+                        </div>
+                        <div className="zw-pd-user-meta">
+                          <div className="zw-pd-user-name">{currentUser.name}</div>
+                          <div className="zw-pd-user-email">{currentUser.email}</div>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="zw-pd-status-row"
+                        onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                      >
+                        <span className="zw-pd-cam-icon">
+                          <svg width="15" height="12" viewBox="0 0 16 12" fill="#f26522">
+                            <path d="M0 2C0 0.895431 0.895431 0 2 0H8C9.10457 0 10 0.895431 10 2V10C10 11.1046 9.10457 12 8 12H2C0.895431 12 0 11.1046 0 10V2Z" />
+                            <path d="M11 3.5L16 1V11L11 8.5V3.5Z" />
+                          </svg>
+                        </span>
+                        <span className="zw-pd-status-text">In a Zoom meeting</span>
+                        <span className="zw-pd-chevron">›</span>
+                      </button>
+
+                      <div className="zw-pd-divider" />
+
+                      <div className="zw-pd-menu-list">
+                        <button
+                          type="button"
+                          className="zw-pd-menu-item"
+                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                          </svg>
+                          <span>Profile</span>
+                        </button>
+                        <button
+                          type="button"
+                          className="zw-pd-menu-item"
+                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="12" cy="12" r="3" />
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                          </svg>
+                          <span>Settings</span>
+                        </button>
+                        <button
+                          type="button"
+                          className="zw-pd-menu-item"
+                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                        >
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                            <rect x="2" y="5" width="20" height="14" rx="2" />
+                            <line x1="2" y1="10" x2="22" y2="10" />
+                          </svg>
+                          <span>Plans and billing</span>
+                        </button>
+                        <button
+                          type="button"
+                          className="zw-pd-menu-item zw-pd-menu-item-between"
+                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                        >
+                          <div className="zw-pd-item-left">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                            </svg>
+                            <span>Help</span>
+                          </div>
+                          <span className="zw-pd-chevron">›</span>
+                        </button>
+                      </div>
+
+                      <div className="zw-pd-divider" />
+
+                      <button
+                        type="button"
+                        className="zw-pd-plain-item"
+                        onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                      >
+                        Add account
+                      </button>
+
+                      <button
+                        type="button"
+                        className="zw-pd-plain-item zw-pd-signout"
+                        onClick={handleUserSignOut}
+                      >
+                        Sign out
+                      </button>
+
+                      <div className="zw-pd-promo-card">
+                        <div className="zw-pd-promo-title">Get more from Zoom</div>
+                        <div className="zw-pd-promo-desc">
+                          Upgrade to Zoom Workplace Pro for unlimited meetings and more
+                        </div>
+                        <button
+                          type="button"
+                          className="zw-pd-promo-btn"
+                          onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                        >
+                          Upgrade now
+                        </button>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="zw-pd-download-link"
+                        onClick={() => showRoomNotice("This is a demo feature and is not available right now.")}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                          <polyline points="7 10 12 15 17 10" />
+                          <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        <span>Download the Zoom app</span>
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </header>
+
+            {/* =========================================================
+                SEARCH MODAL WINDOW (BRIGHT & DEMO READY)
+            ========================================================= */}
+            {searchModalOpen && (
+              <div
+                className="zw-search-backdrop"
+                onClick={(e) => {
+                  if (e.target === e.currentTarget) setSearchModalOpen(false);
+                }}
+              >
+                <div className="zw-search-modal" role="dialog" aria-modal="true" aria-label="Search Workplace">
+                  {/* Top search input row */}
+                  <div className="zw-sm-input-row">
+                    <span className="zw-sm-search-icon">
+                      <SearchIcon size={18} />
+                    </span>
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      className="zw-sm-input"
+                      placeholder="Search"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      className="zw-sm-close-btn"
+                      aria-label="Close search"
+                      onClick={() => setSearchModalOpen(false)}
+                    >
+                      ✕
+                    </button>
+                  </div>
+
+                  {/* Filter chips row (exact Zoom SVG icons matching Image 3) */}
+                  <div className="zw-sm-filters-row">
+                    <button
+                      type="button"
+                      className={`zw-sm-chip ${searchTab === "Top results" ? "is-active" : ""}`}
+                      onClick={() => setSearchTab("Top results")}
+                    >
+                      <span className="zw-sm-chip-icon">
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <circle cx="6.5" cy="6.5" r="4.5" />
+                          <path d="M10 10l4 4" />
+                        </svg>
+                      </span>
+                      <span>Top results</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      className={`zw-sm-chip ${searchTab === "Contacts" ? "is-active" : ""}`}
+                      onClick={() => setSearchTab("Contacts")}
+                    >
+                      <span className="zw-sm-chip-icon">
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12.5 13.5c0-2.3-2-4.2-4.5-4.2s-4.5 1.9-4.5 4.2" />
+                          <circle cx="8" cy="4.5" r="2.8" />
+                        </svg>
+                      </span>
+                      <span>Contacts</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      className={`zw-sm-chip ${searchTab === "Chats & Channels" ? "is-active" : ""}`}
+                      onClick={() => setSearchTab("Chats & Channels")}
+                    >
+                      <span className="zw-sm-chip-icon">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="3" y1="6" x2="13" y2="6" />
+                          <line x1="3" y1="10" x2="13" y2="10" />
+                          <line x1="6.5" y1="3" x2="5.5" y2="13" />
+                          <line x1="10.5" y1="3" x2="9.5" y2="13" />
+                        </svg>
+                      </span>
+                      <span>Chats & Channels</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      className={`zw-sm-chip ${searchTab === "Messages" ? "is-active" : ""}`}
+                      onClick={() => setSearchTab("Messages")}
+                    >
+                      <span className="zw-sm-chip-icon">
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M2.5 3.5C2.5 2.67 3.17 2 4 2H12C12.83 2 13.5 2.67 13.5 3.5V9.5C13.5 10.33 12.83 11 12 11H5.5L2.5 13.5V3.5Z" />
+                        </svg>
+                      </span>
+                      <span>Messages</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      className={`zw-sm-chip ${searchTab === "Files" ? "is-active" : ""}`}
+                      onClick={() => setSearchTab("Files")}
+                    >
+                      <span className="zw-sm-chip-icon">
+                        <svg width="14" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 2H4C3.17 2 2.5 2.67 2.5 3.5V12.5C2.5 13.33 3.17 14 4 14H12C12.83 14 13.5 13.33 13.5 12.5V6.5L9 2Z" />
+                          <polyline points="9 2 9 6.5 13.5 6.5" />
+                        </svg>
+                      </span>
+                      <span>Files</span>
+                    </button>
+                  </div>
+
+                  {/* Recent searches section */}
+                  <div className="zw-sm-recent-header">
+                    <span className="zw-sm-recent-title">Recent searches</span>
+                    <button
+                      type="button"
+                      className="zw-sm-clear-btn"
+                      onClick={() => {
+                        setSearchQuery("");
+                        showRoomNotice("Search history cleared (Demo mode).");
+                      }}
+                    >
+                      Clear all
+                    </button>
+                  </div>
+
+                  {/* Modal Body / Demo Notice State */}
+                  <div className="zw-sm-body">
+                    {searchQuery.trim() ? (
+                      <div className="zw-sm-demo-state">
+                        <div className="zw-sm-demo-icon">🔍</div>
+                        <div className="zw-sm-demo-title">
+                          Demo search: &ldquo;{searchQuery}&rdquo;
+                        </div>
+                        <div className="zw-sm-demo-desc">
+                          This is a demo feature. Real-time workspace indexing and search are not available right now.
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="zw-sm-demo-state">
+                        <div className="zw-sm-demo-icon">📋</div>
+                        <div className="zw-sm-demo-title">
+                          Search is for demonstration only
+                        </div>
+                        <div className="zw-sm-demo-desc">
+                          No recent searches. Global workspace search is currently in demo mode.
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="zw-body">
               <nav className="zw-rail" aria-label="Workplace">

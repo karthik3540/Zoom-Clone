@@ -9,6 +9,12 @@ export default function SignInPage() {
   const [identity, setIdentity] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [demoNotice, setDemoNotice] = useState<string | null>(null);
+
+  const showDemo = (msg = "This demo will be available soon.") => {
+    setDemoNotice(msg);
+    setTimeout(() => setDemoNotice(null), 3500);
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -38,14 +44,14 @@ export default function SignInPage() {
           <p>New products. Big ideas. Fresh inspiration.</p>
           <p>Be part of what&apos;s next at Zoomtopia 2026.</p>
           <strong>October 22</strong>
-          <button type="button">Register now</button>
+          <button type="button" onClick={() => showDemo()}>Register now</button>
         </div>
       </section>
 
       <section className="signin-panel">
         <h1>Sign in</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="signin-identity">Enter email, Zoom Mail or phone number</label>
+          <label htmlFor="signin-identity">Enter email</label>
           <input
             id="signin-identity"
             value={identity}
@@ -58,10 +64,27 @@ export default function SignInPage() {
           <button type="submit" disabled={!identity.trim() || submitting}>Next</button>
         </form>
         <div className="signin-divider">Or sign in with</div>
-        <div className="signin-providers"><span>SSO</span><span>Apple</span><span>Google</span><span>Facebook</span><span>Microsoft</span></div>
-        <a href="#" className="forgot-link">Forgot email?</a>
-        <div className="signin-links">Help &nbsp; Terms &nbsp; Privacy</div>
+        <div className="signin-providers">
+          <button type="button" onClick={() => showDemo()}>SSO</button>
+          <button type="button" onClick={() => showDemo()}>Apple</button>
+          <button type="button" onClick={() => showDemo()}>Google</button>
+          <button type="button" onClick={() => showDemo()}>Facebook</button>
+          <button type="button" onClick={() => showDemo()}>Microsoft</button>
+        </div>
+        <button type="button" className="forgot-link" onClick={() => showDemo()}>Forgot email?</button>
+        <div className="signin-links">
+          <button type="button" onClick={() => showDemo()}>Help</button>
+          <button type="button" onClick={() => showDemo()}>Terms</button>
+          <button type="button" onClick={() => showDemo()}>Privacy</button>
+        </div>
         <p className="recaptcha-note">Zoom is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+
+        {demoNotice && (
+          <div className="zoom-toast" role="status">
+            <span className="toast-icon">ℹ</span>
+            {demoNotice}
+          </div>
+        )}
       </section>
     </main>
   );

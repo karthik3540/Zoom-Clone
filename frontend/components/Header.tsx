@@ -12,10 +12,16 @@ export default function Header() {
   const { host, starting, error } = useHostMeeting();
   // The profile logo shows the signed-in user's initial (saved at sign-in).
   const [initial, setInitial] = useState("");
+  const [demoNotice, setDemoNotice] = useState<string | null>(null);
 
   useEffect(() => {
     setInitial((window.localStorage.getItem("zoom-user-name") ?? "").trim().charAt(0).toLowerCase());
   }, [pathname]);
+
+  const showDemo = (msg = "This demo will be available soon.") => {
+    setDemoNotice(msg);
+    setTimeout(() => setDemoNotice(null), 3500);
+  };
 
   if (pathname === "/signin") {
     return (
@@ -23,10 +29,16 @@ export default function Header() {
         <Link href="/" className="zoom-logo" aria-label="Zoom home"><ZoomLogo /></Link>
         <nav>
           <span>New to Zoom?</span>
-          <Link href="/signin">Sign Up Free</Link>
-          <Link href="/meetings">Support</Link>
-          <button type="button">English⌄</button>
+          <button type="button" onClick={() => showDemo()}>Sign Up Free</button>
+          <button type="button" onClick={() => showDemo()}>Support</button>
+          <button type="button" onClick={() => showDemo()}>English</button>
         </nav>
+        {demoNotice && (
+          <div className="zoom-toast" role="status">
+            <span className="toast-icon">ℹ</span>
+            {demoNotice}
+          </div>
+        )}
       </header>
     );
   }
@@ -36,9 +48,15 @@ export default function Header() {
       <header className="join-header">
         <Link href="/" className="zoom-logo" aria-label="Zoom home"><ZoomLogo /></Link>
         <nav>
-          <Link href="/meetings">Support</Link>
-          <button type="button">English⌄</button>
+          <button type="button" onClick={() => showDemo()}>Support</button>
+          <button type="button" onClick={() => showDemo()}>English</button>
         </nav>
+        {demoNotice && (
+          <div className="zoom-toast" role="status">
+            <span className="toast-icon">ℹ</span>
+            {demoNotice}
+          </div>
+        )}
       </header>
     );
   }

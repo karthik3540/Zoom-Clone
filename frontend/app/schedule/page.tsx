@@ -75,6 +75,27 @@ export default function SchedulePage() {
   const [hostVideo, setHostVideo] = useState(false);
   const [participantVideo, setParticipantVideo] = useState(false);
 
+  const [demoNotice, setDemoNotice] = useState<string | null>(null);
+  const demoNoticeTimerRef = useRef<number | null>(null);
+
+  const showDemoNotice = (msg = "This is a demo feature and is not available right now.") => {
+    setDemoNotice(msg);
+    if (demoNoticeTimerRef.current !== null) {
+      window.clearTimeout(demoNoticeTimerRef.current);
+    }
+    demoNoticeTimerRef.current = window.setTimeout(() => {
+      setDemoNotice(null);
+    }, 4000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (demoNoticeTimerRef.current !== null) {
+        window.clearTimeout(demoNoticeTimerRef.current);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (!getUserId()) {
       router.replace("/signin");
@@ -308,7 +329,13 @@ export default function SchedulePage() {
                       <div>
                         You can schedule meetings for up to 40 minutes each with your current Basic plan. Need more time?
                       </div>
-                      <a href="#" className="zoom-link">Upgrade to Zoom Workplace Pro</a>
+                      <button
+                        type="button"
+                        className="zoom-link"
+                        onClick={() => showDemoNotice("This is a demo feature and is not available right now.")}
+                      >
+                        Upgrade to Zoom Workplace Pro
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -660,6 +687,13 @@ export default function SchedulePage() {
               Cancel
             </button>
           </div>
+
+          {demoNotice && (
+            <div className="zoom-toast" role="status">
+              <span className="toast-icon">ℹ</span>
+              {demoNotice}
+            </div>
+          )}
         </div>
       </main>
 
@@ -977,6 +1011,16 @@ export default function SchedulePage() {
           color: #0e71eb;
           text-decoration: none;
           font-weight: 500;
+        }
+
+        button.zoom-link {
+          background: transparent;
+          border: none;
+          padding: 0;
+          font: inherit;
+          cursor: pointer;
+          display: inline;
+          text-align: left;
         }
 
         .zoom-link:hover {

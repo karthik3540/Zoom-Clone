@@ -6,6 +6,11 @@ import MiniMeeting from "@/components/MiniMeeting";
 export const metadata: Metadata = {
   title: "Zoom",
   description: "Zoom Dashboard Replica",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

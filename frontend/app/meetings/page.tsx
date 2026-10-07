@@ -122,6 +122,22 @@ export default function MeetingsPage() {
   const scheduleMenuRef = useRef<HTMLDivElement>(null);
   const toastTimer = useRef<number | null>(null);
 
+  const [noticeToast, setNoticeToast] = useState<string | null>(null);
+  const noticeTimer = useRef<number | null>(null);
+
+  const showNotice = (message: string) => {
+    setNoticeToast(message);
+    if (noticeTimer.current !== null) window.clearTimeout(noticeTimer.current);
+    noticeTimer.current = window.setTimeout(() => setNoticeToast(null), 4000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (toastTimer.current !== null) window.clearTimeout(toastTimer.current);
+      if (noticeTimer.current !== null) window.clearTimeout(noticeTimer.current);
+    };
+  }, []);
+
   // Date range filter state
   const [filterStart, setFilterStart] = useState<Date>(() => new Date(2026, 9, 7)); // Oct 7, 2026
   const [filterEnd, setFilterEnd] = useState<Date>(() => new Date(2027, 0, 7)); // Jan 7, 2027
@@ -814,9 +830,13 @@ export default function MeetingsPage() {
           <span>
             Your current Basic plan allows you to schedule meetings for up to 40 minutes each. Upgrade to Zoom
             Workplace Pro to schedule meetings for up to 30 hours with advanced meeting features.{" "}
-            <a href="#" className="banner-link">
+            <button
+              type="button"
+              className="banner-link"
+              onClick={() => showNotice("This is a demo feature and is not available right now.")}
+            >
               Discover Zoom Workplace Pro
-            </a>
+            </button>
           </span>
         </div>
 
@@ -1118,9 +1138,13 @@ export default function MeetingsPage() {
                             {isFirstRow && (
                               <div className="time-upsell-badge">
                                 <div className="upsell-heading">Need more meeting time?</div>
-                                <a href="#" className="upsell-action">
+                                <button
+                                  type="button"
+                                  className="upsell-action"
+                                  onClick={() => showNotice("This is a demo feature and is not available right now.")}
+                                >
                                   Upgrade to Zoom Workplace Pro
-                                </a>
+                                </button>
                               </div>
                             )}
                           </div>
@@ -1213,6 +1237,13 @@ export default function MeetingsPage() {
               </svg>
             </span>
             {deleteToast}
+          </div>
+        )}
+
+        {noticeToast && (
+          <div className="zoom-toast" role="status">
+            <span className="toast-icon">ℹ</span>
+            {noticeToast}
           </div>
         )}
 
@@ -1363,6 +1394,16 @@ export default function MeetingsPage() {
           color: #0e71eb;
           text-decoration: none;
           font-weight: 500;
+        }
+
+        button.banner-link {
+          background: transparent;
+          border: none;
+          padding: 0;
+          font: inherit;
+          cursor: pointer;
+          display: inline;
+          text-align: left;
         }
 
         .banner-link:hover {
@@ -1829,6 +1870,15 @@ export default function MeetingsPage() {
           font-weight: 500;
           display: block;
           margin-top: 2px;
+        }
+
+        button.upsell-action {
+          background: transparent;
+          border: none;
+          padding: 0;
+          font: inherit;
+          cursor: pointer;
+          text-align: left;
         }
 
         .upsell-action:hover {
