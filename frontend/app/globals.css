@@ -5711,6 +5711,13 @@ a.recent-item:focus-visible { outline: 2px solid #0b5cff; outline-offset: 1px; }
   /* Schedule and Manage Meeting pages */
   .schedule-container { padding: 24px 20px 60px; }
   .meeting-details-main { padding: 24px 20px 60px; }
+  .details-table .detail-action-buttons { margin: 24px -20px 0; padding: 16px 20px 18px; }
+
+  /* Meeting toolbar: slightly narrower buttons so End stays on screen */
+  .zr-btn { min-width: 60px; }
+
+  /* Meeting room top bar: keep Upgrade, the bell and the avatar */
+  .zw-pill-admin, .zw-pill-download { display: none; }
 }
 
 @media (max-width: 640px) {
@@ -5736,6 +5743,8 @@ a.recent-item:focus-visible { outline: 2px solid #0b5cff; outline-offset: 1px; }
   .plan-details { width: 100%; height: auto; padding: 6px 0; background: transparent; color: #005cff; font-weight: 400; font-size: 14px; justify-content: center; border-radius: 0; }
   .recent-card { min-height: 0; padding: 18px 16px; }
   .quick-actions-card { height: auto; }
+  .dashboard-right { grid-template-columns: minmax(0, 1fr); }
+  .meetings-header { flex-wrap: wrap; gap: 8px; }
 
   /* Schedule and Manage Meeting pages: sidebar tabs on top, content full width */
   .schedule-layout, .meeting-details-layout { flex-direction: column; min-height: 0; }
@@ -5748,6 +5757,10 @@ a.recent-item:focus-visible { outline: 2px solid #0b5cff; outline-offset: 1px; }
   .signin-header { padding-left: 16px; padding-right: 16px; }
   .signin-header nav { gap: 16px; font-size: 14px; }
   .signin-header nav > span, .signin-header nav button { display: none; }
+
+  /* Meeting room top bar: logo, search, bell and avatar only */
+  .zw-pill-upgrade { display: none; }
+  .zw-actions { gap: 6px; }
 
   /* Meeting toolbar: icon-only buttons that fit the width */
   .zr-btn { min-width: 44px; height: 52px; padding: 4px; }
