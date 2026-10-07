@@ -4791,3 +4791,66 @@ a.recent-item:focus-visible { outline: 2px solid #0b5cff; outline-offset: 1px; }
 @media (max-width: 520px) {
   .recent-item-id { display: none; }
 }
+
+/* =========================================================
+   RESPONSIVE: tablet (up to 900px) and phone (up to 640px).
+   Kept at the end so it wins over the desktop rules above;
+   nothing here applies to screens wider than 900px.
+========================================================= */
+@media (max-width: 900px) {
+  /* App shell */
+  .sidebar { width: 190px; min-width: 190px; padding: 16px 0; }
+  .sidebar-home { margin: 0 6px 16px; padding: 0 20px; }
+  .sidebar-item { padding: 0 20px; }
+
+  /* Home dashboard: one column, the two small cards side by side */
+  .dashboard { padding: 24px 20px 48px; }
+  .dashboard-grid { grid-template-columns: minmax(0, 1fr); }
+  .dashboard-right { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+
+  /* Schedule and Manage Meeting pages */
+  .schedule-container { padding: 24px 20px 60px; }
+  .meeting-details-main { padding: 24px 20px 60px; }
+}
+
+@media (max-width: 640px) {
+  /* App shell: the sidebar becomes a row of tabs under the header */
+  .app-body { flex-direction: column; min-height: 0; }
+  .sidebar {
+    flex-direction: row; align-items: center; gap: 6px; width: 100%; min-width: 0; min-height: 0;
+    padding: 8px 12px; border-right: 0; border-bottom: 1px solid #eeeeef; overflow-x: auto;
+  }
+  .sidebar-section-title { display: none; }
+  .sidebar-home, .sidebar-item {
+    flex: 0 0 auto; width: auto; height: 36px; min-height: 36px; margin: 0; padding: 0 16px;
+    border-radius: 18px; font-size: 15px;
+  }
+
+  /* Home dashboard */
+  .dashboard { padding: 16px 12px 40px; }
+  .dashboard-right { grid-template-columns: minmax(0, 1fr); }
+  .profile-card { flex-wrap: wrap; gap: 14px; height: auto; padding: 16px; }
+  .profile-avatar { width: 56px; height: 56px; border-radius: 14px; font-size: 28px; }
+  .profile-info h1 { font-size: 20px; white-space: normal; overflow-wrap: anywhere; }
+  .profile-actions { flex-direction: row; align-items: center; width: 100%; }
+  .manage-plan, .plan-details { flex: 1; width: auto; }
+  .recent-card { min-height: 0; padding: 18px 16px; }
+  .quick-actions-card { height: auto; }
+
+  /* Schedule and Manage Meeting pages: sidebar tabs on top, content full width */
+  .schedule-layout, .meeting-details-layout { flex-direction: column; min-height: 0; }
+  .schedule-main { min-width: 0; }
+  .schedule-container { padding: 16px 12px 48px; }
+  .meeting-details-main { padding: 16px 12px 48px; }
+  .details-table .detail-action-buttons { margin: 24px -12px 0; padding: 12px; }
+
+  /* Sign-in header: keep the logo and the two links */
+  .signin-header { padding-left: 16px; padding-right: 16px; }
+  .signin-header nav { gap: 16px; font-size: 14px; }
+  .signin-header nav > span, .signin-header nav button { display: none; }
+
+  /* Meeting toolbar: icon-only buttons that fit the width */
+  .zr-btn { min-width: 44px; height: 52px; padding: 4px; }
+  .zr-end-btn .zr-btn-icon > svg:first-child { width: 28px; height: 28px; }
+}
+

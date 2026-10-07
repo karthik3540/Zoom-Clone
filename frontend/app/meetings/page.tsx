@@ -2010,6 +2010,108 @@ export default function MeetingsPage() {
           border-radius: 8px;
           font-size: 14px;
         }
+
+        /* ---------------- RESPONSIVE (tablet and phone only) ---------------- */
+        /* Touch screens have no hover: keep Start / Delete visible. */
+        @media (hover: none) {
+          .row-col-actions {
+            opacity: 1;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .meetings-content-area {
+            padding: 24px 20px 64px;
+          }
+
+          .meeting-row-card {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) max-content;
+            gap: 12px;
+          }
+
+          /* The tabs scroll sideways instead of widening the page */
+          .meetings-tabs-bar {
+            overflow-x: auto;
+            scrollbar-width: none;
+          }
+
+          .meetings-tabs-bar::-webkit-scrollbar {
+            display: none;
+          }
+
+          .tab-btn {
+            flex: 0 0 auto;
+            white-space: nowrap;
+          }
+
+          .tab-indicator {
+            bottom: 0;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .meetings-page-container {
+            flex-direction: column;
+            min-height: 0;
+          }
+
+          .meetings-content-area {
+            padding: 16px 12px 88px;
+          }
+
+          .meetings-title-row {
+            flex-wrap: wrap;
+            gap: 12px;
+          }
+
+          .meetings-title-row h1 {
+            font-size: 22px;
+          }
+
+          .schedule-menu {
+            min-width: 0;
+            width: min(290px, calc(100vw - 24px));
+          }
+
+          .plan-upgrade-banner {
+            padding: 12px 14px;
+            font-size: 13px;
+          }
+
+          .meetings-tabs-bar {
+            gap: 20px;
+          }
+
+          .tab-btn {
+            font-size: 15px;
+          }
+
+          .meeting-row-card {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 8px;
+            padding: 14px 4px;
+          }
+
+          .personal-field-row {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 4px;
+          }
+
+          .invite-link-block,
+          .calendar-links-row,
+          .personal-action-bar {
+            flex-wrap: wrap;
+          }
+
+          .invite-url-link {
+            overflow-wrap: anywhere;
+          }
+
+          .floating-chat-bubble {
+            right: 16px;
+            bottom: 16px;
+          }
+        }
       `}</style>
     </div>
   );

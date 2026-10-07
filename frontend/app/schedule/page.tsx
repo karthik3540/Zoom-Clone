@@ -1042,6 +1042,27 @@ export default function SchedulePage() {
             gap: 12px;
           }
         }
+
+        /* Phone: date on its own line, then time and AM/PM; buttons wrap */
+        @media (max-width: 640px) {
+          .zoom-inline-group {
+            flex-wrap: wrap;
+            width: 100%;
+          }
+          .date-field {
+            flex: 1 1 100%;
+            width: 100%;
+            max-width: 440px;
+          }
+          .time-field {
+            flex: 1 1 0;
+            width: auto;
+            min-width: 0;
+          }
+          .zoom-actions-row {
+            flex-wrap: wrap;
+          }
+        }
       `}</style>
     </div>
   );
