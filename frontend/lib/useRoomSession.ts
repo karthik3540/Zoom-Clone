@@ -20,6 +20,7 @@ import {
   muteAll,
   participantAction,
   renameParticipant,
+  startMeeting,
 } from "@/lib/meetings";
 
 const POLL_MS = 3000;
@@ -72,13 +73,27 @@ export function useRoomSession(details: MeetingDetails | null, active: boolean, 
     }
   }, [code, follow, handleFailure]);
 
-  // The owner's browser goes straight in as host; anyone else enters a name (and passcode) first.
+  // The owner's browser goes straight in as host (starting a scheduled meeting first, so the host
+  // is never asked for its passcode); anyone else enters a name (and passcode) first.
   useEffect(() => {
     if (!active || !details || started.current) return;
     started.current = true;
     const isOwner = String(details.host_id) === getUserId();
     if (isOwner) {
-      void join(displayName, details.passcode, true);
+      void (async () => {
+        let passcode = details.passcode;
+        if (details.status === "scheduled") {
+          setState("joining");
+          try {
+            passcode = (await startMeeting(details.meeting_code)).passcode;
+          } catch (failure) {
+            handleFailure(failure);
+            setState("entry");
+            return;
+          }
+        }
+        await join(displayName, passcode, true);
+      })();
       return;
     }
     // A guest coming back to the room (e.g. expanding the minimized meeting) is still in it:
@@ -88,7 +103,7 @@ export function useRoomSession(details: MeetingDetails | null, active: boolean, 
       .catch((failure) => (failure instanceof ApiError && failure.code === "participant_removed"
         ? setState("removed")
         : setState("entry")));
-  }, [active, details, displayName, join, follow]);
+  }, [active, details, displayName, join, follow, handleFailure]);
 
   const refreshRoster = useCallback(async () => {
     if (!code) return;
