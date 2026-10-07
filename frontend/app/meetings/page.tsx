@@ -35,10 +35,27 @@ type TabKind = (typeof TABS)[number];
 function formatMeetingTitle(title: string | null | undefined): string {
   if (!title) return "My Meeting";
   const clean = title.trim();
-  if (/zoom meeting/i.test(clean) || /karthik/i.test(clean) || /'s meeting/i.test(clean)) {
+  if (/zoom meeting/i.test(clean) || /'s meeting/i.test(clean)) {
     return "My Meeting";
   }
   return clean;
+}
+
+/** A random 6-character passcode of letters and digits, like the ones the backend generates. */
+function randomPasscode(): string {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  return Array.from(crypto.getRandomValues(new Uint32Array(6)), (n) => alphabet[n % alphabet.length]).join("");
+}
+
+/** The current wall-clock time in `zone`, as "YYYY-MM-DD HH:MM:00" (the scheduler's format). */
+function nowInZone(zone: string): string {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: zone, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit",
+      hourCycle: "h23",
+    }).formatToParts(new Date()).map((part) => [part.type, part.value]),
+  );
+  return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}:00`;
 }
 
 function timeZoneCity(zone: string): string {
@@ -205,11 +222,11 @@ export default function MeetingsPage() {
             const created = await createScheduledMeeting({
               title: `${user.display_name}'s Personal Meeting Room`,
               description: null,
-              scheduled_start_at: "2026-10-07 12:00:00",
+              scheduled_start_at: nowInZone("Asia/Kolkata"),
               duration_minutes: 40,
               timezone: "Asia/Kolkata",
               meeting_id_type: "personal",
-              passcode: "BZ348N",
+              passcode: randomPasscode(),
               waiting_room_enabled: true,
               encryption_mode: "enhanced",
               notes_enabled: true,
@@ -888,7 +905,7 @@ export default function MeetingsPage() {
                       <span className="check-mark">✓</span>
                       <span className="security-title">Passcode</span>
                       <span className="passcode-display">
-                        {showPasscode ? personalMeeting.passcode || "BZ348N" : "********"}
+                        {showPasscode ? personalMeeting.passcode || "—" : "********"}
                       </span>
                       <button
                         type="button"

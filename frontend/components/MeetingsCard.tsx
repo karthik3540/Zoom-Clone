@@ -101,7 +101,7 @@ function getDateGroupLabel(
 function formatMeetingTitle(title: string | null | undefined): string {
   if (!title) return "My Meeting";
   const clean = title.trim();
-  if (/zoom meeting/i.test(clean) || /karthik/i.test(clean) || /'s meeting/i.test(clean)) {
+  if (/zoom meeting/i.test(clean) || /'s meeting/i.test(clean)) {
     return "My Meeting";
   }
   return clean;
