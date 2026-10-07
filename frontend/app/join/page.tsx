@@ -16,12 +16,15 @@ export default function JoinPage() {
     setStarted(new URLSearchParams(window.location.search).get("started") === "1");
   }, []);
 
-  // Find the real meeting (an 11-digit Meeting ID or a 10-digit Personal Meeting ID), then open its room.
+  // Find the real meeting (an 11-digit Meeting ID or a 10-digit Personal Meeting ID, typed or
+  // taken from a pasted invite link .../j/<id>), then open its room.
   const openMeeting = async () => {
-    const id = meetingId.replace(/[\s-]/g, "");
+    const typed = meetingId.trim();
+    const fromInviteLink = typed.match(/\/j\/([\d\s-]+)/);
+    const id = (fromInviteLink ? fromInviteLink[1] : typed).replace(/[\s-]/g, "");
     if (!id || looking) return;
     if (!/^\d{10,11}$/.test(id)) {
-      setError("Enter a 10- or 11-digit meeting ID.");
+      setError("Enter a 10- or 11-digit meeting ID, or paste the invite link.");
       return;
     }
     setLooking(true);
@@ -82,8 +85,11 @@ export default function JoinPage() {
           id="meeting-id"
           value={meetingId}
           onChange={(event) => setMeetingId(event.target.value)}
-          placeholder="Enter Meeting ID or Personal Link Name"
+          placeholder="Enter Meeting ID or invite link"
           autoFocus
+          onKeyDown={(event) => {
+            if (event.key === "Enter") void openMeeting();
+          }}
         />
         {error && <p className="host-error" role="alert">{error}</p>}
         <button type="button" disabled={!meetingId.trim() || looking} onClick={openMeeting}>Join</button>
