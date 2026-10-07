@@ -746,7 +746,7 @@ export default function MeetingDetailsPage() {
   const hostLabel = currentHost
     ? (currentHost.id === room.me?.id ? myName : currentHost.display_name)
     : (room.me ? "" : hostName);
-  // Time limit (scheduled: its duration; instant: 40 minutes): in the last 10 minutes the host
+  // Time limit (40 minutes for every meeting, as on Zoom's free plan): in the last 10 minutes the host
   // sees a countdown and a warning, again in the last minute; then the meeting ends for everyone.
   const endsAt = details?.ends_at ? Date.parse(details.ends_at) : null;
   const warnHost = showLiveMeeting && room.state === "in" && room.isHost && endsAt !== null;
@@ -762,10 +762,8 @@ export default function MeetingDetailsPage() {
   const [limitDismissed, setLimitDismissed] = useState<string | null>(null);
   const minutesLeft = msLeft === null ? 0 : Math.max(1, Math.ceil(msLeft / 60_000));
   const limitBanner = limitStage && limitDismissed !== limitStage
-    ? `This meeting will end in ${minutesLeft} ${minutesLeft === 1 ? "minute" : "minutes"}. ${
-      details?.meeting_type === "scheduled"
-        ? "Scheduled meetings end when their duration is up."
-        : "Instant meetings end after 40 minutes."}`
+    ? `This meeting will end in ${minutesLeft} ${minutesLeft === 1 ? "minute" : "minutes"}. `
+      + "Meetings on the Basic plan end after 40 minutes."
     : null;
   const countdown = msLeft === null || limitStage === null
     ? null

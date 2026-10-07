@@ -25,7 +25,7 @@ export type MeetingSummary = {
   timezone: string; // IANA name
   started_at: string | null;
   ended_at: string | null;
-  ends_at: string | null; // when a started meeting ends by itself (scheduled: its duration; instant: 40 minutes)
+  ends_at: string | null; // when a started meeting ends by itself: 40 minutes after it started
   has_passcode: boolean;
   passcode_required: boolean; // joining asks for the passcode (scheduled meetings only)
   waiting_room_enabled: boolean;

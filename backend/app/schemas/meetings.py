@@ -148,8 +148,7 @@ class MeetingSummaryOut(ResponseModel):
     started_at: datetime | None
     ended_at: datetime | None
     ends_at: datetime | None = Field(
-        description="When a started meeting ends by itself: a scheduled meeting after its duration, an instant one "
-        "after 40 minutes"
+        description="When a started meeting ends by itself: 40 minutes after it started (free plan limit)"
     )
     has_passcode: bool
     passcode_required: bool  # joining asks for the passcode (scheduled meetings only)

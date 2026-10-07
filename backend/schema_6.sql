@@ -65,9 +65,9 @@
 --     scheduled -> live -> ended. An ended meeting is not restarted.
 --   * Meeting settings are stored as they are saved; enforcing them at
 --     join time (passcode check, video defaults) is application logic.
---   * A live meeting ends by itself at its time limit: a scheduled meeting
---     duration_minutes after it started, an instant meeting 40 minutes
---     after (application logic; nothing extra is stored).
+--   * Free plan: every live meeting, instant or scheduled, ends by itself
+--     40 minutes after it started, whatever duration was scheduled
+--     (application logic; nothing extra is stored).
 --   * Out of scope: instant meetings on the Personal Meeting ID (only
 --     scheduled meetings may use it), recurring meetings, chat,
 --     recordings, transcription, calendar integrations, and storing
@@ -542,8 +542,7 @@ INSERT INTO meeting_attachments (meeting_id, kind, title) VALUES
 -- Live meetings past their time limit (then End a meeting, above)
 --   SELECT id FROM meetings
 --   WHERE status = 'live'
---     AND datetime(started_at, '+' || COALESCE(duration_minutes, 40) || ' minutes')
---         <= datetime('now');
+--     AND datetime(started_at, '+40 minutes') <= datetime('now');
 --
 -- HOST CONTROLS (bonus) -----------------------------------------------
 -- Mute all
