@@ -48,7 +48,7 @@ Zoom web app.
 ### Bonus features
 
 - ✅ **Responsive design**: phone, tablet and desktop layouts
-- ✅ **User authentication**: sign in with an email; a new email signs you up (no password, see Assumptions)
+- **User authentication**: sign in with an email; a new email signs you up (no password, see Assumptions)
 - ✅ **Host controls**: mute all and remove participant, plus admit from the waiting room, move to the
   waiting room, rename, make host and end the meeting for everyone
 
